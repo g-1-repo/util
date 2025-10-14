@@ -1,0 +1,83 @@
+/**
+ * Converts a string to camelCase
+ */
+export function toCamelCase(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/[-_\s]+(.)?/g, (_, char) => char ? char.toUpperCase() : '')
+}
+
+/**
+ * Converts a string to kebab-case
+ */
+export function toKebabCase(str: string): string {
+  return str
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+    ?.map(x => x.toLowerCase())
+    .join('-') || ''
+}
+
+/**
+ * Converts a string to snake_case
+ */
+export function toSnakeCase(str: string): string {
+  return str
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+    ?.map(x => x.toLowerCase())
+    .join('_') || ''
+}
+
+/**
+ * Converts a string to PascalCase
+ */
+export function toPascalCase(str: string): string {
+  return str
+    .replace(/[-_\s]+(.)?/g, (_, char) => char ? char.toUpperCase() : '')
+    .replace(/^[a-z]/, char => char.toUpperCase())
+}
+
+/**
+ * Truncates a string to a specified length
+ */
+export function truncate(str: string, length: number, suffix: string = '...'): string {
+  if (str.length <= length) return str
+  return str.slice(0, length - suffix.length) + suffix
+}
+
+/**
+ * Capitalizes the first letter of a string
+ */
+export function capitalize(str: string): string {
+  if (!str) return str
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+/**
+ * Generates a random string of specified length
+ */
+export function generateRandomString(length: number, charset: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'): string {
+  let result = ''
+  for (let i = 0; i < length; i++) {
+    result += charset.charAt(Math.floor(Math.random() * charset.length))
+  }
+  return result
+}
+
+/**
+ * Removes all whitespace from a string
+ */
+export function removeWhitespace(str: string): string {
+  return str.replace(/\s/g, '')
+}
+
+/**
+ * Slugifies a string for URL-friendly format
+ */
+export function slugify(str: string): string {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, ' ')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}

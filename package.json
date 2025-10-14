@@ -1,0 +1,74 @@
+{
+  "name": "@go-corp/utils",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "A collection of common utility functions for Go Corp projects",
+  "keywords": [
+    "utils",
+    "utilities",
+    "typescript",
+    "javascript"
+  ],
+  "author": "Go Corp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/go-corp/utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/go-corp/utils/issues"
+  },
+  "homepage": "https://github.com/go-corp/utils#readme",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:ci": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "rm -rf dist",
+    "prepare": "bun run build",
+    "prepublishOnly": "bun run type-check && bun run test:ci && bun run build",
+    "publish:public": "bun run build && npm publish --access public",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish",
+    "changeset:status": "changeset status",
+    "release": "bun run build && bun run changeset:version && bun run changeset:publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7",
+    "@types/bun": "^1.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.3.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.9.0",
+    "vitest": "^2.1.0",
+    "@vitest/coverage-v8": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
