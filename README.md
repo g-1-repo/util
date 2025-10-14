@@ -158,6 +158,39 @@ bun run type-check
 bun run lint
 ```
 
+## MCP Server Integration
+
+@go-corp/utils includes an MCP (Model Context Protocol) server that automatically provides AI assistants with context about your utilities.
+
+### Setup
+
+1. Install the package:
+```bash
+npm install @go-corp/utils
+```
+
+2. Configure Warp MCP in your terminal settings:
+```json
+{
+  "mcpServers": {
+    "go-utils": {
+      "command": "go-utils-mcp"
+    }
+  }
+}
+```
+
+3. The AI will now automatically know when `@go-corp/utils` is available and suggest relevant utilities!
+
+### What the AI Will Know
+- ✅ Which utilities are available in your project
+- 📋 Detailed function signatures and usage examples  
+- 🎯 When to suggest specific utilities
+- 🚀 Import statements and code examples
+- 💡 Perfect use cases for different scenarios
+
+See `mcp-server/README.md` for detailed setup instructions.
+
 ## Contributing
 
 1. Fork the repository

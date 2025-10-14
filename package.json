@@ -32,11 +32,17 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
+    "mcp-server",
     "README.md"
   ],
+  "bin": {
+    "go-utils-mcp": "./mcp-server/server.js"
+  },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && bun run build:mcp",
+    "build:mcp": "bun build mcp-server/server.ts --outdir mcp-server --outfile server.js --target node",
     "dev": "tsup --watch",
+    "mcp:start": "node mcp-server/server.js",
     "test": "vitest",
     "test:ci": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -70,5 +76,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.0"
   }
 }
