@@ -1,5 +1,14 @@
 # @go-corp/utils
 
+## 1.1.1
+
+### Patch Changes
+
+- Transfer package to @go-corp organization
+  - Move from personal scope to Go Corp organization
+  - Update repository URLs and metadata
+  - No functional changes to utilities
+
 ## 1.1.0
 
 ### Minor Changes
