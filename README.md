@@ -113,6 +113,32 @@ const cloned = deepClone({ a: { b: 1 } })
 - `prettyPrint(obj: any, indent?: number): void` - Pretty prints object
 - `measureTime<T>(fn: () => T | Promise<T>, label?: string): Promise<{ result: T; duration: number }>` - Measures function execution time
 
+### Node.js Utilities (Server-side only)
+
+#### Git & Repository Management
+- `getCurrentBranch(): string` - Get current Git branch
+- `hasUncommittedChanges(): boolean` - Check for uncommitted changes
+- `getChangedFiles(): string[]` - Get list of changed files
+- `getRecentCommits(count?: number): string[]` - Get recent commit messages
+- `incrementVersion(version: string, type: 'major' | 'minor' | 'patch'): string` - Increment version string
+- `getCurrentVersion(packagePath?: string): string` - Get version from package.json
+- `updatePackageVersion(newVersion: string, packagePath?: string): void` - Update package.json version
+- `analyzeChangesForVersionBump(): VersionAnalysis` - Analyze changes for version bump
+- `updateChangelog(version: string, changeType: string, changesList: string[]): void` - Update CHANGELOG.md
+- `commitAndPush(message: string, push?: boolean): void` - Create and push git commit
+- `isGitRepository(): boolean` - Check if in a git repository
+- `exec(command: string, options?: ExecOptions): string` - Execute shell command
+- `log(message: string, color?: string): void` - Log with color
+- `COLORS` - Terminal color constants
+
+#### CLI Prompts & Interaction
+- `text(options: PromptOptions): Promise<string>` - Simple text prompt
+- `confirm(options: ConfirmOptions): Promise<boolean>` - Yes/no confirmation
+- `select<T>(options: SelectOptions<T>): Promise<T>` - Select from options
+- `multiselect<T>(options: MultiSelectOptions<T>): Promise<T[]>` - Multi-select from options
+- `password(options: PromptOptions): Promise<string>` - Hidden password input
+- `ProgressIndicator` - Animated progress indicator class
+
 ## Development
 
 ```bash

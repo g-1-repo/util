@@ -27,3 +27,6 @@ export * from './web/index.js'
 
 // Debug utilities
 export * from './debug/index.js'
+
+// Node.js utilities (server-side only)
+export * from './node/index.js'

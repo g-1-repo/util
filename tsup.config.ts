@@ -12,7 +12,7 @@ export default defineConfig({
   outDir: 'dist',
   bundle: true,
   treeshake: true,
-  external: [],
+  external: ['child_process', 'fs', 'readline'],
   noExternal: [],
   platform: 'neutral'
 })
