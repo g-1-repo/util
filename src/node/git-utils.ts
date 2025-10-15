@@ -140,6 +140,8 @@ export interface VersionAnalysis {
   versionBump: VersionBumpType
   changeType: string
   changesList: string[]
+  changedFiles: string[]
+  commits: string[]
 }
 
 /**
@@ -201,7 +203,9 @@ export function analyzeChangesForVersionBump(): VersionAnalysis {
   return {
     versionBump,
     changeType,
-    changesList: [...new Set(changesList)] // Remove duplicates
+    changesList: [...new Set(changesList)], // Remove duplicates
+    changedFiles,
+    commits
   }
 }
 

@@ -1,5 +1,11 @@
 # @go-corp/utils
 
+## 1.1.2
+
+### Patch Changes
+
+- fixed analyzeChangesForVersionBump()
+
 ## 1.1.1
 
 ### Patch Changes
