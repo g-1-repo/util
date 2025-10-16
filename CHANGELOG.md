@@ -1,5 +1,14 @@
 # @go-corp/utils
 
+## 1.2.2
+
+### Patch Changes
+
+- Update dependencies and package configuration
+- Update configuration files
+- General maintenance and updates
+
+
 ## 1.2.1
 
 ### Patch Changes

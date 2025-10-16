@@ -1,7 +1,7 @@
 {
   "name": "@go-corp/utils",
   "type": "module",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A collection of common utility functions for Go Corp projects",
   "author": "Go Corp <dev@golive.me>",
   "license": "MIT",
@@ -17,13 +17,62 @@
     "utils",
     "utilities",
     "typescript",
-    "javascript"
+    "javascript",
+    "tree-shaking",
+    "esm",
+    "cjs"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./array": {
+      "types": "./dist/array/index.d.ts",
+      "import": "./dist/array/index.js",
+      "require": "./dist/array/index.cjs"
+    },
+    "./async": {
+      "types": "./dist/async/index.d.ts",
+      "import": "./dist/async/index.js",
+      "require": "./dist/async/index.cjs"
+    },
+    "./date": {
+      "types": "./dist/date/index.d.ts",
+      "import": "./dist/date/index.js",
+      "require": "./dist/date/index.cjs"
+    },
+    "./string": {
+      "types": "./dist/string/index.d.ts",
+      "import": "./dist/string/index.js",
+      "require": "./dist/string/index.cjs"
+    },
+    "./object": {
+      "types": "./dist/object/index.d.ts",
+      "import": "./dist/object/index.js",
+      "require": "./dist/object/index.cjs"
+    },
+    "./math": {
+      "types": "./dist/math/index.d.ts",
+      "import": "./dist/math/index.js",
+      "require": "./dist/math/index.cjs"
+    },
+    "./validation": {
+      "types": "./dist/validation/index.d.ts",
+      "import": "./dist/validation/index.js",
+      "require": "./dist/validation/index.cjs"
+    },
+    "./web": {
+      "types": "./dist/web/index.d.ts",
+      "import": "./dist/web/index.js",
+      "require": "./dist/web/index.cjs"
+    },
+    "./node": {
+      "types": "./dist/node/index.d.ts",
+      "import": "./dist/node/index.js",
+      "require": "./dist/node/index.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -39,9 +88,11 @@
     "mcp-server"
   ],
   "scripts": {
-    "build": "tsup && bun run build:mcp",
-    "build:mcp": "bun build mcp-server/server.ts --outdir mcp-server --outfile server.js --target node",
+    "build": "NODE_ENV=production tsup && bun run build:mcp",
+    "build:dev": "tsup && bun run build:mcp",
+    "build:mcp": "bun build mcp-server/server.ts --outdir mcp-server --outfile server.js --target node --minify",
     "dev": "tsup --watch",
+    "size-check": "bun run build && bundlesize",
     "mcp:start": "node mcp-server/server.js",
     "test": "vitest",
     "test:ci": "vitest run",
@@ -80,10 +131,23 @@
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "@vitest/coverage-v8": "^2.1.0",
+    "bundlesize2": "^0.0.31",
     "eslint": "^9.0.0",
     "prettier": "^3.3.0",
     "tsup": "^8.3.0",
     "typescript": "^5.9.0",
     "vitest": "^2.1.0"
-  }
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/index.js",
+      "maxSize": "25kb",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/*/index.js",
+      "maxSize": "5kb",
+      "compression": "gzip"
+    }
+  ]
 }

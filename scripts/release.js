@@ -97,12 +97,7 @@ async function createRelease() {
     log('🔍 Analyzing changes...', COLORS.yellow)
     const analysis = analyzeChangesForVersionBump()
     
-    // Debug the analysis result
-    console.log('\n🛠 Analysis result:')
-    console.log('- Version bump:', analysis.versionBump)
-    console.log('- Change type:', analysis.changeType) 
-    console.log('- Changes list:', analysis.changesList)
-    console.log('- Changed files count:', analysis.changedFiles?.length || 0)
+    // Analysis complete
 
     log(`📁 Found ${analysis.changedFiles.length} changed files`, COLORS.green)
     log(`📝 Found ${analysis.commits.length} recent commits`, COLORS.green)
@@ -132,10 +127,7 @@ async function createRelease() {
     const majorVersion = incrementVersion(currentVersion, 'major')
     const recommendedVersion = incrementVersion(currentVersion, analysis.versionBump)
     
-    console.log('\n🔍 Debug info:')
-    console.log(`Current version: ${currentVersion}`)
-    console.log(`Recommended bump: ${analysis.versionBump}`)
-    console.log(`Patch: ${patchVersion}, Minor: ${minorVersion}, Major: ${majorVersion}`)
+    // Version options calculated
     
     // Determine version bump type
     const versionBumpType = await select({
@@ -151,9 +143,7 @@ async function createRelease() {
     // The selected bump type is already the value from the selection
     const selectedBumpType = versionBumpType
     
-    console.log('\n🛠 Selection result:')
-    console.log('- Selected bump type:', selectedBumpType)
-    console.log('- Type of selection:', typeof selectedBumpType)
+    // Version selected
 
     const newVersion = incrementVersion(currentVersion, selectedBumpType)
     log(`🎯 Selected version: ${newVersion} (${selectedBumpType})`, COLORS.cyan)
