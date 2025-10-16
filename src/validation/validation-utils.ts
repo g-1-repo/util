@@ -11,7 +11,8 @@ export function isValidEmail(email: string): boolean {
  */
 export function isValidUrl(url: string): boolean {
   try {
-    new URL(url)
+    // Using new URL() for validation only
+    void new URL(url)
     return true
   }
   catch {
@@ -23,7 +24,7 @@ export function isValidUrl(url: string): boolean {
  * Validates a phone number (basic US format)
  */
 export function isValidPhone(phone: string): boolean {
-  const phoneRegex = /^\+?1?[-.\s]?\(?(\d{3})\)?[-.\s]?(\d{3})[-.\s]?(\d{4})$/
+  const phoneRegex = /^\+?1?[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/
   return phoneRegex.test(phone)
 }
 

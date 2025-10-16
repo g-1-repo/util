@@ -283,7 +283,6 @@ export function updateChangelog(version: string, changeType: string, changesList
     changelog = '# Changelog\n\n'
   }
 
-  const date = new Date().toISOString().split('T')[0]
   const newEntry = `## ${version}\n\n### ${changeType}\n\n${changesList.map(change => `- ${change}`).join('\n')}\n\n`
 
   // Insert new entry after the first heading

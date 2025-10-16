@@ -1,0 +1,159 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+
+    - name: Install dependencies
+      run: bun install --frozen-lockfile
+
+    - name: Type check
+      run: bun run type-check
+
+    - name: Lint
+      run: bun run lint
+
+    - name: Run tests
+      run: bun run test:ci
+
+    - name: Build
+      run: bun run build
+
+    - name: Bundle size check
+      run: bun run size-check
+
+    - name: Bundle analysis
+      run: bun run analyze:report
+
+  bundle-size-check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+
+    - name: Install dependencies
+      run: bun install --frozen-lockfile
+
+    - name: Build current branch
+      run: bun run build
+
+    - name: Analyze current bundle
+      run: bun run analyze:report > current-analysis.txt
+
+    - name: Get current bundle sizes
+      id: current-size
+      run: |
+        echo "main_size=$(stat -c%s dist/index.js)" >> $GITHUB_OUTPUT
+        echo "total_size=$(du -b dist | tail -1 | cut -f1)" >> $GITHUB_OUTPUT
+
+    - name: Checkout main branch
+      run: git checkout origin/main
+
+    - name: Build main branch
+      run: bun run build
+
+    - name: Get main branch bundle sizes
+      id: main-size
+      run: |
+        echo "main_size=$(stat -c%s dist/index.js)" >> $GITHUB_OUTPUT
+        echo "total_size=$(du -b dist | tail -1 | cut -f1)" >> $GITHUB_OUTPUT
+
+    - name: Compare bundle sizes
+      run: |
+        current_main=${{ steps.current-size.outputs.main_size }}
+        main_main=${{ steps.main-size.outputs.main_size }}
+        current_total=${{ steps.current-size.outputs.total_size }}
+        main_total=${{ steps.main-size.outputs.total_size }}
+        
+        echo "## Bundle Size Comparison" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Bundle | Current | Main | Diff |" >> $GITHUB_STEP_SUMMARY
+        echo "|--------|---------|------|------|" >> $GITHUB_STEP_SUMMARY
+        
+        main_diff=$((current_main - main_main))
+        total_diff=$((current_total - main_total))
+        
+        echo "| Main Bundle | ${current_main}B | ${main_main}B | ${main_diff}B |" >> $GITHUB_STEP_SUMMARY
+        echo "| Total Dist | ${current_total}B | ${main_total}B | ${total_diff}B |" >> $GITHUB_STEP_SUMMARY
+        
+        # Fail if bundle size increases significantly
+        if [ $main_diff -gt 1000 ]; then
+          echo "❌ Main bundle size increased by more than 1KB!" >> $GITHUB_STEP_SUMMARY
+          exit 1
+        fi
+        
+        if [ $total_diff -gt 10000 ]; then
+          echo "❌ Total bundle size increased by more than 10KB!" >> $GITHUB_STEP_SUMMARY
+          exit 1
+        fi
+        
+        echo "✅ Bundle sizes are within acceptable limits" >> $GITHUB_STEP_SUMMARY
+
+  performance-check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+
+    - name: Install dependencies
+      run: bun install --frozen-lockfile
+
+    - name: Performance benchmark
+      run: |
+        echo "## Performance Metrics" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Build timing
+        start_time=$(date +%s%3N)
+        bun run build
+        end_time=$(date +%s%3N)
+        build_time=$((end_time - start_time))
+        
+        # Test timing
+        start_time=$(date +%s%3N)
+        bun run test:ci
+        end_time=$(date +%s%3N)
+        test_time=$((end_time - start_time))
+        
+        echo "| Metric | Time |" >> $GITHUB_STEP_SUMMARY
+        echo "|--------|------|" >> $GITHUB_STEP_SUMMARY
+        echo "| Build Time | ${build_time}ms |" >> $GITHUB_STEP_SUMMARY
+        echo "| Test Time | ${test_time}ms |" >> $GITHUB_STEP_SUMMARY
+        
+        # Bundle analysis
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Bundle Analysis" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        bun run analyze:report >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

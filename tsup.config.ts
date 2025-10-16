@@ -14,6 +14,8 @@ export default defineConfig({
     'validation/index': 'src/validation/index.ts',
     'web/index': 'src/web/index.ts',
     'node/index': 'src/node/index.ts',
+    'node/git-utils': 'src/node/git-utils.ts',
+    'node/prompt-utils': 'src/node/prompt-utils.ts',
     'types/index': 'src/types/index.ts',
     'crypto/index': 'src/crypto/index.ts',
     'database/index': 'src/database/index.ts',
@@ -23,7 +25,7 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   dts: true,
   splitting: true, // Enable code splitting
-  sourcemap: true,
+  sourcemap: process.env.NODE_ENV !== 'production', // Only in development
   clean: true,
   minify: process.env.NODE_ENV === 'production', // Minify for production
   target: 'es2022',
@@ -33,9 +35,19 @@ export default defineConfig({
   external: ['child_process', 'fs', 'readline', 'path', 'os'],
   noExternal: ['nanoid'], // Bundle small dependencies
   platform: 'neutral',
-  // Optimize chunks
+  // Optimize chunks with more aggressive splitting
   esbuildOptions: (options) => {
     options.chunkNames = 'chunks/[name]-[hash]'
     options.mangleProps = /^_/ // Mangle private properties
+    // More aggressive code splitting
+    options.splitting = true
+    options.mainFields = ['module', 'main']
+    // Split large files into smaller chunks
+    if (process.env.NODE_ENV === 'production') {
+      options.treeShaking = true
+      options.minifyWhitespace = true
+      options.minifyIdentifiers = true
+      options.minifySyntax = true
+    }
   }
 })

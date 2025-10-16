@@ -8,7 +8,7 @@ import {
   generateNumericId,
   generateUrlSafeId,
   getCacheStats,
-} from './index'
+} from '../src/crypto/index'
 
 describe('crypto utilities', () => {
   beforeEach(() => {

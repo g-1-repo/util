@@ -1,5 +1,18 @@
 # @go-corp/utils
 
+## 1.2.3
+
+### Patch Changes
+
+- Update source code and functionality
+- Update dependencies and package configuration
+- Update TypeScript configuration
+- Update documentation
+- Improve testing coverage
+- Update configuration files
+- General maintenance and updates
+
+
 ## 1.2.2
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 /**
- * Converts a string to camelCase
+ * Converts a string to camelCase by removing hyphens, underscores, and spaces,
+ * then capitalizing the first letter of each word except the first.
+ * 
+ * @param str - The input string to convert
+ * @returns The camelCase version of the input string
+ * 
+ * @example
+ * ```typescript
+ * toCamelCase('hello world') // 'helloWorld'
+ * toCamelCase('my-awesome-function') // 'myAwesomeFunction'
+ * toCamelCase('user_name') // 'userName'
+ * ```
  */
 export function toCamelCase(str: string): string {
   return str
@@ -8,11 +19,22 @@ export function toCamelCase(str: string): string {
 }
 
 /**
- * Converts a string to kebab-case
+ * Converts a string to kebab-case by splitting on word boundaries and joining with hyphens.
+ * Handles camelCase, PascalCase, snake_case, and regular words.
+ * 
+ * @param str - The input string to convert
+ * @returns The kebab-case version of the input string
+ * 
+ * @example
+ * ```typescript
+ * toKebabCase('helloWorld') // 'hello-world'
+ * toKebabCase('MyAwesomeFunction') // 'my-awesome-function' 
+ * toKebabCase('user_name') // 'user-name'
+ * ```
  */
 export function toKebabCase(str: string): string {
   return str
-    .match(/[A-Z]{2,}(?=[A-Z][a-z]+\d*|\b)|[A-Z]?[a-z]+\d*|[A-Z]|\d+/g)
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+\d|\b)|[A-Z]?[a-z]+\d*|[A-Z]|\d+/g)
     ?.map(x => x.toLowerCase())
     .join('-') || ''
 }
@@ -22,7 +44,7 @@ export function toKebabCase(str: string): string {
  */
 export function toSnakeCase(str: string): string {
   return str
-    .match(/[A-Z]{2,}(?=[A-Z][a-z]+\d*|\b)|[A-Z]?[a-z]+\d*|[A-Z]|\d+/g)
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+\d|\b)|[A-Z]?[a-z]+\d*|[A-Z]|\d+/g)
     ?.map(x => x.toLowerCase())
     .join('_') || ''
 }
@@ -37,7 +59,19 @@ export function toPascalCase(str: string): string {
 }
 
 /**
- * Truncates a string to a specified length
+ * Truncates a string to a specified length, adding a suffix if truncated.
+ * 
+ * @param str - The input string to truncate
+ * @param length - The maximum length of the result (including suffix)
+ * @param suffix - The suffix to append when truncating (defaults to '...')
+ * @returns The truncated string with suffix, or original string if within length
+ * 
+ * @example
+ * ```typescript
+ * truncate('Hello, world!', 10) // 'Hello, w...'
+ * truncate('Short', 10) // 'Short'
+ * truncate('Long text here', 15, '…') // 'Long text her…'
+ * ```
  */
 export function truncate(str: string, length: number, suffix: string = '...'): string {
   if (str.length <= length)

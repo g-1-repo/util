@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "jsx": "preserve",
+    "jsx": "preserve", 
     "lib": ["ES2022", "DOM"],
     "moduleDetection": "force",
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
     "rootDir": "./src",
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -17,9 +19,8 @@
     "noImplicitOverride": true,
     "noUncheckedIndexedAccess": true,
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "noEmit": false,
-    "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
