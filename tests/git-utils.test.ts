@@ -1,11 +1,10 @@
-import { describe, it, expect } from 'vitest'
-import { 
+import { describe, expect, it } from 'vitest'
+import {
+  COLORS,
   incrementVersion,
-  analyzeChangesForVersionBump,
-  COLORS
 } from '../src/node/git-utils.js'
 
-describe('Git Utilities', () => {
+describe('git Utilities', () => {
   describe('incrementVersion', () => {
     it('should increment patch version', () => {
       expect(incrementVersion('1.2.3', 'patch')).toBe('1.2.4')
@@ -26,12 +25,12 @@ describe('Git Utilities', () => {
     })
   })
 
-  describe('COLORS', () => {
+  describe('cOLORS', () => {
     it('should have all required color constants', () => {
-      expect(COLORS.reset).toBe('\x1b[0m')
-      expect(COLORS.red).toBe('\x1b[31m')
-      expect(COLORS.green).toBe('\x1b[32m')
-      expect(COLORS.yellow).toBe('\x1b[33m')
+      expect(COLORS.reset).toBe('\x1B[0m')
+      expect(COLORS.red).toBe('\x1B[31m')
+      expect(COLORS.green).toBe('\x1B[32m')
+      expect(COLORS.yellow).toBe('\x1B[33m')
     })
   })
 

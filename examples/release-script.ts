@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
  * Example Release Script using @go-corp/utils
- * 
+ *
  * This demonstrates how to use the Node.js utilities for automated releases
  */
 
@@ -20,7 +20,7 @@ import {
   ProgressIndicator,
   select,
   updateChangelog,
-  updatePackageVersion
+  updatePackageVersion,
 } from '../src/index.js'
 
 async function main() {
@@ -60,9 +60,9 @@ async function main() {
     options: [
       { value: 'patch', label: `🔧 Patch - ${analysis.versionBump === 'patch' ? '(recommended)' : ''}` },
       { value: 'minor', label: `✨ Minor - ${analysis.versionBump === 'minor' ? '(recommended)' : ''}` },
-      { value: 'major', label: `💥 Major - ${analysis.versionBump === 'major' ? '(recommended)' : ''}` }
+      { value: 'major', label: `💥 Major - ${analysis.versionBump === 'major' ? '(recommended)' : ''}` },
     ],
-    default: analysis.versionBump
+    default: analysis.versionBump,
   })
 
   const finalVersion = incrementVersion(currentVersion, versionType)
@@ -70,7 +70,7 @@ async function main() {
   // Final confirmation
   const proceed = await confirm({
     message: `Proceed with ${versionType} release to v${finalVersion}?`,
-    default: true
+    default: true,
   })
 
   if (!proceed) {
@@ -103,8 +103,8 @@ async function main() {
     log(`✅ Version updated: ${currentVersion} → ${finalVersion}`, COLORS.green)
     log(`✅ Changelog updated with ${analysis.changesList.length} changes`, COLORS.green)
     log(`✅ Changes committed and pushed`, COLORS.green)
-
-  } catch (error: any) {
+  }
+  catch (error: any) {
     progress.stop('❌ Release failed')
     log(`Error: ${error.message}`, COLORS.red)
     process.exit(1)
@@ -112,7 +112,7 @@ async function main() {
 }
 
 // Run the script
-main().catch(error => {
+main().catch((error) => {
   log(`❌ Script failed: ${error.message}`, COLORS.red)
   process.exit(1)
 })

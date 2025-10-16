@@ -6,7 +6,7 @@ This MCP (Model Context Protocol) server provides AI assistants with context abo
 
 The MCP server automatically:
 - ✅ Detects if `@go-corp/utils` is installed in the current project
-- 📋 Provides detailed information about available utilities  
+- 📋 Provides detailed information about available utilities
 - 🔍 Shows project context (name, directory, git status)
 - 💡 Suggests when to use specific utilities
 - 🚀 Gives usage examples and import statements
@@ -52,7 +52,7 @@ When you're in a project with `@go-corp/utils` installed, the AI assistant will 
 - `getCurrentBranch()`, `hasUncommittedChanges()` - Git status
 - `commitAndPush()` - Git automation
 
-### 🎯 Interactive CLI Prompts  
+### 🎯 Interactive CLI Prompts
 - `confirm()`, `select()`, `multiselect()` - User input
 - `password()` - Secure input
 - `ProgressIndicator` - Progress spinners
@@ -65,7 +65,7 @@ When you're in a project with `@go-corp/utils` installed, the AI assistant will 
 
 The AI will suggest these utilities when you mention:
 - **Release scripts** or automated releases
-- **CLI tools** or command-line interfaces  
+- **CLI tools** or command-line interfaces
 - **Git workflows** or version management
 - **Interactive prompts** or user input
 - **Developer tooling** or build scripts
@@ -76,11 +76,11 @@ The AI will suggest these utilities when you mention:
 When you say *"I need to create a release script"*, the AI will suggest:
 
 ```typescript
-import { 
+import {
   analyzeChangesForVersionBump,
-  updateChangelog,
   confirm,
-  ProgressIndicator
+  ProgressIndicator,
+  updateChangelog
 } from '@go-corp/utils'
 
 // Your release automation code here

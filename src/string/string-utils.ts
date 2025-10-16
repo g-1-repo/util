@@ -12,7 +12,7 @@ export function toCamelCase(str: string): string {
  */
 export function toKebabCase(str: string): string {
   return str
-    .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+\d*|\b)|[A-Z]?[a-z]+\d*|[A-Z]|\d+/g)
     ?.map(x => x.toLowerCase())
     .join('-') || ''
 }
@@ -22,7 +22,7 @@ export function toKebabCase(str: string): string {
  */
 export function toSnakeCase(str: string): string {
   return str
-    .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+\d*|\b)|[A-Z]?[a-z]+\d*|[A-Z]|\d+/g)
     ?.map(x => x.toLowerCase())
     .join('_') || ''
 }
@@ -40,7 +40,8 @@ export function toPascalCase(str: string): string {
  * Truncates a string to a specified length
  */
 export function truncate(str: string, length: number, suffix: string = '...'): string {
-  if (str.length <= length) return str
+  if (str.length <= length)
+    return str
   return str.slice(0, length - suffix.length) + suffix
 }
 
@@ -48,7 +49,8 @@ export function truncate(str: string, length: number, suffix: string = '...'): s
  * Capitalizes the first letter of a string
  */
 export function capitalize(str: string): string {
-  if (!str) return str
+  if (!str)
+    return str
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 

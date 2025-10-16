@@ -2,7 +2,7 @@
  * Validates an email address
  */
 export function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailRegex = /^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/
   return emailRegex.test(email)
 }
 
@@ -13,7 +13,8 @@ export function isValidUrl(url: string): boolean {
   try {
     new URL(url)
     return true
-  } catch {
+  }
+  catch {
     return false
   }
 }
@@ -22,7 +23,7 @@ export function isValidUrl(url: string): boolean {
  * Validates a phone number (basic US format)
  */
 export function isValidPhone(phone: string): boolean {
-  const phoneRegex = /^\+?1?[-.\s]?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/
+  const phoneRegex = /^\+?1?[-.\s]?\(?(\d{3})\)?[-.\s]?(\d{3})[-.\s]?(\d{4})$/
   return phoneRegex.test(phone)
 }
 

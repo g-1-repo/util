@@ -15,12 +15,12 @@ bun add @go-corp/utils
 ## Usage
 
 ```typescript
-import { toCamelCase, formatDate, deepClone } from '@go-corp/utils'
+import { deepClone, formatDate, toCamelCase } from '@go-corp/utils'
 
 // String utilities
 const camelCased = toCamelCase('hello world') // 'helloWorld'
 
-// Date utilities  
+// Date utilities
 const formatted = formatDate(new Date(), 'medium') // 'Jan 1, 2024'
 
 // Object utilities
@@ -184,7 +184,7 @@ npm install @go-corp/utils
 
 ### What the AI Will Know
 - ✅ Which utilities are available in your project
-- 📋 Detailed function signatures and usage examples  
+- 📋 Detailed function signatures and usage examples
 - 🎯 When to suggest specific utilities
 - 🚀 Import statements and code examples
 - 💡 Perfect use cases for different scenarios

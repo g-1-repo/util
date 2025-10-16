@@ -6,7 +6,7 @@ export function formatDate(date: Date, format: 'short' | 'medium' | 'long' | 'is
     short: { year: 'numeric', month: 'numeric', day: 'numeric' } as const,
     medium: { year: 'numeric', month: 'short', day: 'numeric' } as const,
     long: { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' } as const,
-    iso: 'iso' as const
+    iso: 'iso' as const,
   }
 
   if (format === 'iso') {
@@ -39,7 +39,7 @@ export function isThisWeek(date: Date): boolean {
   const today = new Date()
   const startOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay())
   const endOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - today.getDay()))
-  
+
   return date >= startOfWeek && date <= endOfWeek
 }
 
@@ -93,15 +93,20 @@ export function getRelativeTime(date: Date, baseDate: Date = new Date()): string
 
   if (Math.abs(diffSecs) < 60) {
     return 'just now'
-  } else if (Math.abs(diffMins) < 60) {
+  }
+  else if (Math.abs(diffMins) < 60) {
     return diffMins > 0 ? `${diffMins} minutes ago` : `in ${Math.abs(diffMins)} minutes`
-  } else if (Math.abs(diffHours) < 24) {
+  }
+  else if (Math.abs(diffHours) < 24) {
     return diffHours > 0 ? `${diffHours} hours ago` : `in ${Math.abs(diffHours)} hours`
-  } else if (Math.abs(diffDays) < 30) {
+  }
+  else if (Math.abs(diffDays) < 30) {
     return diffDays > 0 ? `${diffDays} days ago` : `in ${Math.abs(diffDays)} days`
-  } else if (Math.abs(diffMonths) < 12) {
+  }
+  else if (Math.abs(diffMonths) < 12) {
     return diffMonths > 0 ? `${diffMonths} months ago` : `in ${Math.abs(diffMonths)} months`
-  } else {
+  }
+  else {
     return diffYears > 0 ? `${diffYears} years ago` : `in ${Math.abs(diffYears)} years`
   }
 }

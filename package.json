@@ -1,16 +1,11 @@
 {
   "name": "@go-corp/utils",
   "type": "module",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A collection of common utility functions for Go Corp projects",
-  "keywords": [
-    "utils",
-    "utilities",
-    "typescript",
-    "javascript"
-  ],
   "author": "Go Corp <dev@golive.me>",
   "license": "MIT",
+  "homepage": "https://github.com/go-corp/utils#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/go-corp/utils.git"
@@ -18,7 +13,12 @@
   "bugs": {
     "url": "https://github.com/go-corp/utils/issues"
   },
-  "homepage": "https://github.com/go-corp/utils#readme",
+  "keywords": [
+    "utils",
+    "utilities",
+    "typescript",
+    "javascript"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -30,14 +30,14 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "mcp-server",
-    "README.md"
-  ],
   "bin": {
     "go-utils-mcp": "./mcp-server/server.js"
   },
+  "files": [
+    "README.md",
+    "dist",
+    "mcp-server"
+  ],
   "scripts": {
     "build": "tsup && bun run build:mcp",
     "build:mcp": "bun build mcp-server/server.ts --outdir mcp-server --outfile server.js --target node",
@@ -48,8 +48,8 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch",
     "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.js",
-    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "clean": "rm -rf dist",
@@ -60,24 +60,30 @@
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
     "changeset:status": "changeset status",
-    "release": "bun run build && bun run changeset:version && bun run changeset:publish"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.29.7",
-    "@types/bun": "^1.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
-    "eslint": "^9.0.0",
-    "prettier": "^3.3.0",
-    "tsup": "^8.3.0",
-    "typescript": "^5.9.0",
-    "vitest": "^2.1.0",
-    "@vitest/coverage-v8": "^2.1.0"
+    "release": "node scripts/release.js",
+    "release:help": "node scripts/release.js --help",
+    "workflow": "bun scripts/workflow.ts",
+    "demo": "bun scripts/demo.ts",
+    "finish-branch": "bun -e 'import { finishBranch } from \"@go-corp/utils\"; await finishBranch()'"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.20.0"
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "nanoid": "^5.1.6"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.0.0",
+    "@changesets/cli": "^2.29.7",
+    "@types/bun": "^1.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vitest/coverage-v8": "^2.1.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.3.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.9.0",
+    "vitest": "^2.1.0"
   }
 }

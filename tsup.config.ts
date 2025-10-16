@@ -14,5 +14,5 @@ export default defineConfig({
   treeshake: true,
   external: ['child_process', 'fs', 'readline'],
   noExternal: [],
-  platform: 'neutral'
+  platform: 'neutral',
 })

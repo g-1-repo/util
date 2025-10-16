@@ -1,5 +1,20 @@
 # @go-corp/utils
 
+## 1.2.0
+
+### Minor Changes
+
+- Update source code and functionality
+- Update dependencies and package configuration
+- Update TypeScript configuration
+- Update documentation
+- Improve testing coverage
+- Update configuration files
+- Fix bugs and resolve issues
+- General maintenance and updates
+- Add new features and functionality
+
+
 ## 1.1.2
 
 ### Patch Changes

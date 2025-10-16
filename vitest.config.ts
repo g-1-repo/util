@@ -12,8 +12,8 @@ export default defineConfig({
         'dist/',
         'coverage/',
         '**/*.d.ts',
-        '**/*.config.ts'
-      ]
-    }
-  }
+        '**/*.config.ts',
+      ],
+    },
+  },
 })

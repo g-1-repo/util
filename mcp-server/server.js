@@ -6193,6 +6193,11 @@ var require_ajv = __commonJS((exports, module) => {
   function noop() {}
 });
 
+// mcp-server/server.ts
+import { execSync } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+
 // node_modules/zod/v3/external.js
 var exports_external = {};
 __export(exports_external, {
@@ -11327,9 +11332,6 @@ class StdioServerTransport {
 }
 
 // mcp-server/server.ts
-import { readFileSync, existsSync } from "fs";
-import { join } from "path";
-import { execSync } from "child_process";
 var server = new Server({
   name: "@go-corp/utils-mcp",
   version: "1.0.0"

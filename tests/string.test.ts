@@ -1,15 +1,15 @@
-import { describe, it, expect } from 'vitest'
-import { 
-  toCamelCase, 
-  toKebabCase, 
-  toSnakeCase, 
-  toPascalCase, 
-  truncate, 
-  capitalize, 
-  slugify 
+import { describe, expect, it } from 'vitest'
+import {
+  capitalize,
+  slugify,
+  toCamelCase,
+  toKebabCase,
+  toPascalCase,
+  toSnakeCase,
+  truncate,
 } from '../src/string/string-utils.js'
 
-describe('String Utilities', () => {
+describe('string Utilities', () => {
   describe('toCamelCase', () => {
     it('should convert to camelCase', () => {
       expect(toCamelCase('hello world')).toBe('helloWorld')
