@@ -11,7 +11,7 @@ import {
   takeFirstOrThrow,
   takeLast,
   takeLastOrThrow,
-} from './index'
+} from '../src/database/index'
 
 describe('database utilities', () => {
   describe('databaseError', () => {

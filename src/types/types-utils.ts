@@ -16,7 +16,7 @@ export function isString(value: unknown): value is string {
  * Type guard to check if value is a number
  */
 export function isNumber(value: unknown): value is number {
-  return typeof value === 'number' && !isNaN(value)
+  return typeof value === 'number' && !Number.isNaN(value)
 }
 
 /**
@@ -43,6 +43,6 @@ export function isObject(value: unknown): value is Record<string, unknown> {
 /**
  * Type guard to check if value is a function
  */
-export function isFunction(value: unknown): value is Function {
+export function isFunction(value: unknown): value is (...args: any[]) => any {
   return typeof value === 'function'
 }

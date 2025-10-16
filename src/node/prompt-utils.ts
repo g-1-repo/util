@@ -130,7 +130,7 @@ export async function select<T>(options: SelectOptions<T>): Promise<T> {
       rl.question('\nSelect an option (number): ', (answer) => {
         const choice = Number.parseInt(answer.trim())
 
-        if (isNaN(choice) || choice < 1 || choice > options.options.length) {
+        if (Number.isNaN(choice) || choice < 1 || choice > options.options.length) {
           console.log('❌ Invalid choice. Please select a valid number.')
           return askForChoice()
         }
@@ -193,7 +193,7 @@ export async function multiselect<T>(options: MultiSelectOptions<T>): Promise<T[
 
         const choices = trimmed.split(',')
           .map(c => Number.parseInt(c.trim()))
-          .filter(c => !isNaN(c) && c >= 1 && c <= options.options.length)
+          .filter(c => !Number.isNaN(c) && c >= 1 && c <= options.options.length)
 
         if (choices.length === 0) {
           console.log('❌ No valid choices selected')
@@ -228,7 +228,7 @@ export async function password(options: PromptOptions): Promise<string> {
     console.log(`${options.message}: `)
     let passwordValue = ''
 
-    const onData = (char: Buffer) => {
+    const onData = (char: Uint8Array) => {
       const key = char.toString()
 
       if (key === '\n' || key === '\r' || key === '\u0004') {

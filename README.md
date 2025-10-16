@@ -1,5 +1,12 @@
 # @go-corp/utils
 
+[![npm version](https://badge.fury.io/js/@go-corp%2Futils.svg)](https://badge.fury.io/js/@go-corp%2Futils)
+[![npm downloads](https://img.shields.io/npm/dm/@go-corp/utils.svg)](https://www.npmjs.com/package/@go-corp/utils)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@go-corp/utils?label=bundle%20size)](https://bundlephobia.com/package/@go-corp/utils)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/go-corp/utils/workflows/CI/badge.svg)](https://github.com/go-corp/utils/actions)
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
+
 A comprehensive collection of utility functions for TypeScript/JavaScript projects.
 
 ## Installation

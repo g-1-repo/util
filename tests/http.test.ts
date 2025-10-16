@@ -1,4 +1,4 @@
-import type { HttpStatusCode, HttpStatusPhrase } from './index'
+import type { HttpStatusCode, HttpStatusPhrase } from '../src/http/index'
 import { describe, expect, it } from 'vitest'
 import {
   BAD_REQUEST,
@@ -19,7 +19,7 @@ import {
   TOO_MANY_REQUESTS,
   UNAUTHORIZED,
   UNPROCESSABLE_ENTITY,
-} from './index'
+} from '../src/http/index'
 
 describe('http-status utilities', () => {
   describe('hTTP_STATUS_CODES', () => {

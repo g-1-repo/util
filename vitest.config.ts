@@ -4,16 +4,11 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/',
-        'dist/',
-        'coverage/',
-        '**/*.d.ts',
-        '**/*.config.ts',
-      ],
+    pool: 'threads',
+    poolOptions: {
+      threads: {
+        singleThread: false,
+      },
     },
   },
 })
