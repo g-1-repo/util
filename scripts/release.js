@@ -96,6 +96,13 @@ async function createRelease() {
     // Analyze changes
     log('🔍 Analyzing changes...', COLORS.yellow)
     const analysis = analyzeChangesForVersionBump()
+    
+    // Debug the analysis result
+    console.log('\n🛠 Analysis result:')
+    console.log('- Version bump:', analysis.versionBump)
+    console.log('- Change type:', analysis.changeType) 
+    console.log('- Changes list:', analysis.changesList)
+    console.log('- Changed files count:', analysis.changedFiles?.length || 0)
 
     log(`📁 Found ${analysis.changedFiles.length} changed files`, COLORS.green)
     log(`📝 Found ${analysis.commits.length} recent commits`, COLORS.green)
@@ -119,19 +126,34 @@ async function createRelease() {
       }
     }
 
+    // Prepare version options with safe calculations
+    const patchVersion = incrementVersion(currentVersion, 'patch')
+    const minorVersion = incrementVersion(currentVersion, 'minor') 
+    const majorVersion = incrementVersion(currentVersion, 'major')
+    const recommendedVersion = incrementVersion(currentVersion, analysis.versionBump)
+    
+    console.log('\n🔍 Debug info:')
+    console.log(`Current version: ${currentVersion}`)
+    console.log(`Recommended bump: ${analysis.versionBump}`)
+    console.log(`Patch: ${patchVersion}, Minor: ${minorVersion}, Major: ${majorVersion}`)
+    
     // Determine version bump type
     const versionBumpType = await select({
       message: 'Select version bump type:',
       options: [
-        { value: analysis.versionBump, label: `${analysis.versionBump} (recommended) - ${incrementVersion(currentVersion, analysis.versionBump)}` },
-        { value: 'patch', label: `patch - ${incrementVersion(currentVersion, 'patch')}` },
-        { value: 'minor', label: `minor - ${incrementVersion(currentVersion, 'minor')}` },
-        { value: 'major', label: `major - ${incrementVersion(currentVersion, 'major')}` }
+        { value: analysis.versionBump, label: `${analysis.versionBump} (recommended) → ${recommendedVersion}` },
+        { value: 'patch', label: `patch → ${patchVersion}` },
+        { value: 'minor', label: `minor → ${minorVersion}` },
+        { value: 'major', label: `major → ${majorVersion}` }
       ]
     })
     
     // The selected bump type is already the value from the selection
     const selectedBumpType = versionBumpType
+    
+    console.log('\n🛠 Selection result:')
+    console.log('- Selected bump type:', selectedBumpType)
+    console.log('- Type of selection:', typeof selectedBumpType)
 
     const newVersion = incrementVersion(currentVersion, selectedBumpType)
     log(`🎯 Selected version: ${newVersion} (${selectedBumpType})`, COLORS.cyan)
@@ -140,19 +162,27 @@ async function createRelease() {
     let changesList = analysis.changesList
 
     // Allow manual changelog override
-    const useAutoChangelog = await confirm(
-      'Use automatically detected changes for changelog?'
-    )
+    const useAutoChangelog = await confirm({
+      message: 'Use automatically detected changes for changelog?',
+      default: true
+    })
 
     if (!useAutoChangelog) {
       log('📝 Please edit the changelog manually after the release', COLORS.yellow)
       changesList = ['Manual release - see commit history for details']
     }
 
+    // Ask about publishing
+    const shouldPublish = await confirm({
+      message: 'Publish to npm after release?',
+      default: false
+    })
+
     // Final confirmation
-    const shouldProceed = await confirm(
-      `Create release ${newVersion}? This will update package.json, changelog, commit, and push.`
-    )
+    const shouldProceed = await confirm({
+      message: `Create release ${newVersion}? This will update package.json, changelog, commit, push${shouldPublish ? ', and publish to npm' : ''}.`,
+      default: false
+    })
 
     if (!shouldProceed) {
       log('❌ Release cancelled', COLORS.red)
@@ -170,15 +200,35 @@ async function createRelease() {
     const commitMessage = `chore: release v${newVersion}`
     await commitAndPush(commitMessage, true)
 
+    // Publish to npm if requested
+    if (shouldPublish) {
+      log('📦 Publishing to npm...', COLORS.cyan)
+      try {
+        execSync('bun run build', { stdio: 'inherit' })
+        execSync('npm publish --access public', { stdio: 'inherit' })
+        log('✅ Successfully published to npm!', COLORS.green)
+      } catch (error) {
+        log('❌ Failed to publish to npm:', COLORS.red)
+        log(error.message, COLORS.red)
+        log('You can manually publish later with: bun run publish:public', COLORS.yellow)
+      }
+    }
+
     log(`✅ Release v${newVersion} completed successfully!`, COLORS.green)
-    log('🎉 Your TypeScript utilities release has been published to Git!', COLORS.magenta)
+    log(`🎉 Your TypeScript utilities release has been published to Git${shouldPublish ? ' and npm' : ''}!`, COLORS.magenta)
 
     // Show next steps
     console.log('\n📋 Next steps:')
-    console.log('• Run `bun run publish:public` to publish to NPM')
+    if (!shouldPublish) {
+      console.log('• Run `bun run publish:public` to publish to npm')
+    }
     console.log('• Create a GitHub release if desired')
     console.log('• Update dependent projects to use the new version')
     console.log('• Test the MCP server integration with the new utilities')
+    if (shouldPublish) {
+      console.log('• Verify the package is available on npmjs.com')
+      console.log(`• Test installation: \`npm install @go-corp/utils@${newVersion}\``)
+    }
   }
   catch (error) {
     log(`❌ Release failed: ${error.message}`, COLORS.red)
@@ -207,9 +257,10 @@ This script will:
 5. Generate/update CHANGELOG.md
 6. Commit and push changes
 7. Create Git tags
+8. Optionally publish to npm
 
 The script uses @go-corp/utils for all Git operations and follows semantic versioning.
-Perfect for TypeScript utility library releases with automated changelog management.
+Perfect for TypeScript utility library releases with automated changelog management and npm publishing.
 `)
   process.exit(0)
 }

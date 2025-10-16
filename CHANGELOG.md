@@ -1,5 +1,12 @@
 # @go-corp/utils
 
+## 1.2.1
+
+### Patch Changes
+
+- General maintenance and updates
+
+
 ## 1.2.0
 
 ### Minor Changes
