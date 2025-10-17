@@ -1,6 +1,6 @@
 /**
  * HTTP Exception factory functions for Cloudflare Workers
- * 
+ *
  * These functions create HTTP exceptions with standard status codes and messages.
  * Compatible with Hono's HTTPException class and other web frameworks.
  */
@@ -8,24 +8,24 @@
 // Note: We avoid importing HTTPException directly to keep this framework-agnostic
 // Users can create their own HTTPException or use these with any framework
 
-import { 
-  BAD_REQUEST, 
-  UNAUTHORIZED, 
-  FORBIDDEN, 
-  NOT_FOUND, 
-  CONFLICT, 
-  TOO_MANY_REQUESTS, 
-  INTERNAL_SERVER_ERROR 
+import {
+  BAD_REQUEST,
+  CONFLICT,
+  FORBIDDEN,
+  INTERNAL_SERVER_ERROR,
+  NOT_FOUND,
+  TOO_MANY_REQUESTS,
+  UNAUTHORIZED,
 } from '../http/index.js'
 
 /**
  * Generic HTTP error creator
  */
 export function createHttpError(
-  statusCode: number, 
-  message: string, 
-  details?: unknown
-): { statusCode: number; message: string; details?: unknown } {
+  statusCode: number,
+  message: string,
+  details?: unknown,
+): { statusCode: number, message: string, details?: unknown } {
   return { statusCode, message, details }
 }
 
@@ -82,9 +82,9 @@ export function createInternalError(message: string = 'Internal Error', details?
  * Factory function to create HTTP error from status code
  */
 export function createErrorFromStatus(
-  statusCode: number, 
-  message?: string, 
-  details?: unknown
+  statusCode: number,
+  message?: string,
+  details?: unknown,
 ) {
   const defaultMessages: Record<number, string> = {
     [BAD_REQUEST]: 'Bad Request',
@@ -95,7 +95,7 @@ export function createErrorFromStatus(
     [TOO_MANY_REQUESTS]: 'Too Many Requests',
     [INTERNAL_SERVER_ERROR]: 'Internal Server Error',
   }
-  
+
   const defaultMessage = defaultMessages[statusCode] || 'Unknown Error'
   return createHttpError(statusCode, message || defaultMessage, details)
 }

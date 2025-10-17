@@ -1,23 +1,32 @@
 /**
- * Deep clones an object
+ * Deep clones an object with support for Date, RegExp, and other types
+ * More type-safe and performant implementation
  */
 export function deepClone<T>(obj: T): T {
+  // Handle primitive types and null
   if (obj === null || typeof obj !== 'object')
     return obj
+
+  // Handle Date objects
   if (obj instanceof Date)
     return new Date(obj.getTime()) as T
+
+  // Handle RegExp objects
+  if (obj instanceof RegExp)
+    return new RegExp(obj.source, obj.flags) as T
+
+  // Handle Arrays
   if (Array.isArray(obj))
-    return obj.map(item => deepClone(item)) as T
-  if (typeof obj === 'object') {
-    const clonedObj: any = {}
-    for (const key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        clonedObj[key] = deepClone(obj[key])
-      }
+    return obj.map(deepClone) as T
+
+  // Handle plain objects
+  const cloned = {} as T
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) {
+      cloned[key] = deepClone(obj[key])
     }
-    return clonedObj
   }
-  return obj
+  return cloned
 }
 
 /**

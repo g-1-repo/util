@@ -1,17 +1,17 @@
 /**
  * Structured error classes for Cloudflare Workers applications
- * 
+ *
  * These classes provide consistent error handling with structured data,
  * JSON serialization, and proper HTTP status codes.
  */
 
-import { 
-  INTERNAL_SERVER_ERROR, 
-  BAD_REQUEST, 
-  NOT_FOUND, 
-  CONFLICT, 
-  UNAUTHORIZED, 
-  FORBIDDEN 
+import {
+  BAD_REQUEST,
+  CONFLICT,
+  FORBIDDEN,
+  INTERNAL_SERVER_ERROR,
+  NOT_FOUND,
+  UNAUTHORIZED,
 } from '../http/index.js'
 
 /**

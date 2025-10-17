@@ -20,7 +20,11 @@ export default defineConfig({
     'crypto/index': 'src/crypto/index.ts',
     'database/index': 'src/database/index.ts',
     'debug/index': 'src/debug/index.ts',
-    'http/index': 'src/http/index.ts'
+    'http/index': 'src/http/index.ts',
+    'api/index': 'src/api/index.ts',
+    'env/index': 'src/env/index.ts',
+    'validation/core': 'src/validation/core.ts',
+    'validation/web': 'src/validation/web.ts'
   },
   format: ['cjs', 'esm'],
   dts: true,
@@ -39,15 +43,32 @@ export default defineConfig({
   esbuildOptions: (options) => {
     options.chunkNames = 'chunks/[name]-[hash]'
     options.mangleProps = /^_/ // Mangle private properties
-    // More aggressive code splitting
     options.splitting = true
     options.mainFields = ['module', 'main']
-    // Split large files into smaller chunks
+    
+    // Enhanced tree-shaking and optimization
+    options.treeShaking = true
+    options.define = {
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+    }
+    
+    // Production optimizations
     if (process.env.NODE_ENV === 'production') {
-      options.treeShaking = true
       options.minifyWhitespace = true
       options.minifyIdentifiers = true
       options.minifySyntax = true
+      options.drop = ['console', 'debugger']
     }
+    
+    // Platform-specific externals
+    options.external = [
+      ...options.external || [],
+      'crypto',
+      'node:crypto', 
+      'fs',
+      'node:fs',
+      'path',
+      'node:path'
+    ]
   }
 })

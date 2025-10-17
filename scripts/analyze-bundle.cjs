@@ -37,7 +37,8 @@ function analyzeBundle() {
     'index.js', 'array/index.js', 'async/index.js', 'crypto/index.js',
     'database/index.js', 'date/index.js', 'debug/index.js', 'http/index.js',
     'math/index.js', 'node/index.js', 'object/index.js', 'string/index.js',
-    'types/index.js', 'validation/index.js', 'web/index.js'
+    'types/index.js', 'validation/index.js', 'web/index.js',
+    'api/index.js', 'env/index.js', 'validation/core.js', 'validation/web.js'
   ];
 
   let totalSize = 0;

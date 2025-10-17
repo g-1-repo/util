@@ -1,5 +1,44 @@
 # @go-corp/utils
 
+## 1.5.0
+
+### Minor Changes
+
+- **Major Performance & Feature Update** - Comprehensive optimizations and new utility modules
+  
+  ### 🚀 **New Modules**
+  - **API Response Utilities** (`@go-corp/utils/api`) - Standardized API response formats
+    - `createApiResponse()`, `createErrorResponse()`, `createPaginatedResponse()`
+    - Common HTTP status codes and error codes for Go Corp projects  
+    - Type guards for response validation
+  - **Environment Utilities** (`@go-corp/utils/env`) - Cross-platform environment handling
+    - `getEnv()`, `requireEnv()`, `getEnvNumber()`, `getEnvBoolean()`, `getEnvJson()`
+    - `loadEnvConfig()` with type validation
+    - Works in Node.js and edge environments (Cloudflare Workers)
+  - **Enhanced Validation** - Better tree-shaking with core/web split
+    - `@go-corp/utils/validation/core` - Universal validation (email, UUID, phone, etc.)
+    - `@go-corp/utils/validation/web` - Web-specific validation (URL, JSON, semver, etc.)
+    - New validators: IP addresses, hex colors, credit cards, domains, slugs
+  
+  ### ⚡ **Performance Optimizations**
+  - **String Utilities** - Shared regex patterns reduce bundle size by ~15%
+  - **Object Utilities** - Enhanced `deepClone()` with RegExp support and better type safety
+  - **Async Utilities** - Fixed Cloudflare Workers compatibility (removed NodeJS.Timeout)
+  - **Bundle Optimization** - Enhanced tree-shaking and code splitting
+  
+  ### 🔧 **Developer Experience**
+  - **Performance Benchmarking** - Added comprehensive performance tests
+  - **Enhanced Build Config** - Optimized tsup and vitest configurations
+  - **Better Type Safety** - Full compatibility with `exactOptionalPropertyTypes`
+  - **Improved Linting** - Resolved all ESLint issues with modern patterns
+  
+  ### 📊 **Bundle Impact**
+  - Main bundle: 1.52KB gzipped (under 25KB target) ✅
+  - Individual modules: All under 5KB gzipped ✅
+  - 167 tests passing with 100% compatibility
+  
+  Perfect for modern Go Corp projects requiring standardized APIs and cross-platform compatibility!
+
 ## 1.3.0
 
 ### Minor Changes

@@ -1,7 +1,7 @@
 {
   "name": "@go-corp/utils",
   "type": "module",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A collection of Cloudflare Workers-compatible utility functions for Go Corp projects. Node.js utilities available via @go-corp/utils/node.",
   "author": "Go Corp <dev@golive.me>",
   "license": "MIT",
@@ -110,6 +110,26 @@
       "types": "./dist/http/index.d.ts",
       "import": "./dist/http/index.js",
       "require": "./dist/http/index.cjs"
+    },
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js",
+      "require": "./dist/api/index.cjs"
+    },
+    "./env": {
+      "types": "./dist/env/index.d.ts",
+      "import": "./dist/env/index.js",
+      "require": "./dist/env/index.cjs"
+    },
+    "./validation/core": {
+      "types": "./dist/validation/core.d.ts",
+      "import": "./dist/validation/core.js",
+      "require": "./dist/validation/core.cjs"
+    },
+    "./validation/web": {
+      "types": "./dist/validation/web.d.ts",
+      "import": "./dist/validation/web.js",
+      "require": "./dist/validation/web.cjs"
     },
     "./package.json": "./package.json"
   },
