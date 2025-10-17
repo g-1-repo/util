@@ -20,22 +20,22 @@
  */
 
 /**
- * Generic error class for database operations
+ * Generic error class for database query operations
  */
-export class DatabaseError extends Error {
+export class DatabaseQueryError extends Error {
   constructor(message: string, public readonly code?: string) {
     super(message)
-    this.name = 'DatabaseError'
+    this.name = 'DatabaseQueryError'
   }
 }
 
 /**
- * Error thrown when a required database record is not found
+ * Error thrown when a required database record is not found in query results
  */
-export class NotFoundError extends DatabaseError {
+export class QueryNotFoundError extends DatabaseQueryError {
   constructor(message: string = 'Record not found') {
     super(message, 'NOT_FOUND')
-    this.name = 'NotFoundError'
+    this.name = 'QueryNotFoundError'
   }
 }
 
@@ -61,7 +61,7 @@ export function takeFirst<T>(values: T[]): T | null {
  * @param values - Array of values from database query
  * @param errorMessage - Custom error message (optional)
  * @returns First element
- * @throws NotFoundError if array is empty
+ * @throws QueryNotFoundError if array is empty
  */
 export function takeFirstOrThrow<T>(
   values: T[],
@@ -69,7 +69,7 @@ export function takeFirstOrThrow<T>(
 ): T {
   const value = takeFirst(values)
   if (value === null) {
-    throw new NotFoundError(errorMessage)
+    throw new QueryNotFoundError(errorMessage)
   }
   return value
 }
@@ -90,7 +90,7 @@ export function takeLast<T>(values: T[]): T | null {
  * @param values - Array of values from database query
  * @param errorMessage - Custom error message (optional)
  * @returns Last element
- * @throws NotFoundError if array is empty
+ * @throws QueryNotFoundError if array is empty
  */
 export function takeLastOrThrow<T>(
   values: T[],
@@ -98,7 +98,7 @@ export function takeLastOrThrow<T>(
 ): T {
   const value = takeLast(values)
   if (value === null) {
-    throw new NotFoundError(errorMessage)
+    throw new QueryNotFoundError(errorMessage)
   }
   return value
 }
@@ -112,18 +112,18 @@ export function takeLastOrThrow<T>(
  * @param values - Array of values from database query
  * @param errorMessage - Custom error message (optional)
  * @returns The single element
- * @throws NotFoundError if array is empty
- * @throws DatabaseError if array has more than one element
+ * @throws QueryNotFoundError if array is empty
+ * @throws DatabaseQueryError if array has more than one element
  */
 export function takeExactlyOne<T>(
   values: T[],
   errorMessage: string = 'Record not found',
 ): T {
   if (values.length === 0) {
-    throw new NotFoundError(errorMessage)
+    throw new QueryNotFoundError(errorMessage)
   }
   if (values.length > 1) {
-    throw new DatabaseError(`Expected exactly one record, but found ${values.length}`)
+    throw new DatabaseQueryError(`Expected exactly one record, but found ${values.length}`)
   }
   return values[0]!
 }

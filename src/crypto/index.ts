@@ -144,3 +144,6 @@ export function getCacheStats(): { size: number, keys: string[] } {
     keys: Array.from(nanoIdCache.keys()),
   }
 }
+
+// Export CUID2-based ID utilities
+export * from './id-utils.js'

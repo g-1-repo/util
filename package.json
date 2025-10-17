@@ -169,6 +169,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.20.0",
+    "@paralleldrive/cuid2": "^2.2.2",
     "nanoid": "^5.1.6"
   },
   "devDependencies": {

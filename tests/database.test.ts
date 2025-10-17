@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import {
-  DatabaseError,
+  DatabaseQueryError,
   hasMultiple,
   isEmptyArray,
   isExactlyOne,
-  NotFoundError,
+  QueryNotFoundError,
   paginate,
   takeExactlyOne,
   takeFirst,
@@ -14,31 +14,31 @@ import {
 } from '../src/database/index'
 
 describe('database utilities', () => {
-  describe('databaseError', () => {
+  describe('databaseQueryError', () => {
     it('creates error with message', () => {
-      const error = new DatabaseError('Test error')
+      const error = new DatabaseQueryError('Test error')
       expect(error.message).toBe('Test error')
-      expect(error.name).toBe('DatabaseError')
+      expect(error.name).toBe('DatabaseQueryError')
       expect(error.code).toBeUndefined()
     })
 
     it('creates error with message and code', () => {
-      const error = new DatabaseError('Test error', 'TEST_CODE')
+      const error = new DatabaseQueryError('Test error', 'TEST_CODE')
       expect(error.message).toBe('Test error')
       expect(error.code).toBe('TEST_CODE')
     })
   })
 
-  describe('notFoundError', () => {
+  describe('queryNotFoundError', () => {
     it('creates error with default message', () => {
-      const error = new NotFoundError()
+      const error = new QueryNotFoundError()
       expect(error.message).toBe('Record not found')
-      expect(error.name).toBe('NotFoundError')
+      expect(error.name).toBe('QueryNotFoundError')
       expect(error.code).toBe('NOT_FOUND')
     })
 
     it('creates error with custom message', () => {
-      const error = new NotFoundError('User not found')
+      const error = new QueryNotFoundError('User not found')
       expect(error.message).toBe('User not found')
       expect(error.code).toBe('NOT_FOUND')
     })
@@ -67,12 +67,12 @@ describe('database utilities', () => {
       expect(result).toBe(1)
     })
 
-    it('throws NotFoundError for empty array with default message', () => {
-      expect(() => takeFirstOrThrow([])).toThrow(NotFoundError)
+    it('throws QueryNotFoundError for empty array with default message', () => {
+      expect(() => takeFirstOrThrow([])).toThrow(QueryNotFoundError)
       expect(() => takeFirstOrThrow([])).toThrow('Record not found')
     })
 
-    it('throws NotFoundError with custom message', () => {
+    it('throws QueryNotFoundError with custom message', () => {
       expect(() => takeFirstOrThrow([], 'Custom error')).toThrow('Custom error')
     })
   })
@@ -100,12 +100,12 @@ describe('database utilities', () => {
       expect(result).toBe(3)
     })
 
-    it('throws NotFoundError for empty array', () => {
-      expect(() => takeLastOrThrow([])).toThrow(NotFoundError)
+    it('throws QueryNotFoundError for empty array', () => {
+      expect(() => takeLastOrThrow([])).toThrow(QueryNotFoundError)
       expect(() => takeLastOrThrow([])).toThrow('Record not found')
     })
 
-    it('throws NotFoundError with custom message', () => {
+    it('throws QueryNotFoundError with custom message', () => {
       expect(() => takeLastOrThrow([], 'Last record not found')).toThrow('Last record not found')
     })
   })
@@ -116,13 +116,13 @@ describe('database utilities', () => {
       expect(result).toBe(42)
     })
 
-    it('throws NotFoundError for empty array', () => {
-      expect(() => takeExactlyOne([])).toThrow(NotFoundError)
+    it('throws QueryNotFoundError for empty array', () => {
+      expect(() => takeExactlyOne([])).toThrow(QueryNotFoundError)
       expect(() => takeExactlyOne([])).toThrow('Record not found')
     })
 
-    it('throws DatabaseError for multiple elements', () => {
-      expect(() => takeExactlyOne([1, 2])).toThrow(DatabaseError)
+    it('throws DatabaseQueryError for multiple elements', () => {
+      expect(() => takeExactlyOne([1, 2])).toThrow(DatabaseQueryError)
       expect(() => takeExactlyOne([1, 2])).toThrow('Expected exactly one record, but found 2')
     })
 
