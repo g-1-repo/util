@@ -1,3 +1,11 @@
+/**
+ * Main entry point for @go-corp/utils
+ * 
+ * This entry point only includes utilities that are compatible with Cloudflare Workers.
+ * For Node.js-specific utilities (like git operations, file system, etc.), 
+ * import from '@go-corp/utils/node' instead.
+ */
+
 // Array utilities
 export * from './array/index.js'
 
@@ -13,7 +21,7 @@ export * from './database/index.js'
 // Date utilities
 export * from './date/index.js'
 
-// Debug utilities
+// Debug utilities (Cloudflare Workers compatible only)
 export * from './debug/index.js'
 
 // HTTP status utilities
@@ -21,9 +29,6 @@ export * from './http/index.js'
 
 // Math utilities
 export * from './math/index.js'
-
-// Node.js utilities (server-side only)
-export * from './node/index.js'
 
 // Object utilities
 export * from './object/index.js'
@@ -39,3 +44,6 @@ export * from './validation/index.js'
 
 // URL/Web utilities
 export * from './web/index.js'
+
+// NOTE: Node.js utilities are NOT exported from the main entry point
+// to ensure Cloudflare Workers compatibility. Use '@go-corp/utils/node' instead.
