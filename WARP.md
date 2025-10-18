@@ -56,8 +56,8 @@ npx go-utils-mcp
 
 ### Publishing & Releases
 ```bash
-# Automated release with interactive workflow
-bun run release        # Interactive release with optional npm publishing
+# Automated release with go-workflow (enterprise-grade)
+bun run release        # Complete release workflow: quality gates → git → npm
 bun run release:help   # Show detailed release help
 
 # Alternative: Use changesets for version management
@@ -69,7 +69,7 @@ bun run changeset:publish
 bun run publish:public
 
 # Development workflow utilities
-bun run workflow       # Interactive development utilities
+bun run workflow       # Show go-workflow status
 bun run demo          # Show library capabilities demo
 ```
 
