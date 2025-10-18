@@ -205,6 +205,200 @@ export const CommonEnvVars = {
 } as const
 
 /**
+ * Runtime detection utilities
+ */
+export type Runtime = 'node' | 'bun' | 'cloudflare-workers' | 'unknown'
+export type DatabaseProvider = 'memory' | 'sqlite' | 'd1'
+
+/**
+ * Detect the current runtime environment
+ */
+export function detectRuntime(): Runtime {
+  // Cloudflare Workers
+  if (typeof globalThis !== 'undefined') {
+    if ('CloudflareWorkerGlobalScope' in globalThis || 'caches' in globalThis) {
+      return 'cloudflare-workers'
+    }
+  }
+
+  // Bun
+  if (typeof (globalThis as any).Bun !== 'undefined') {
+    return 'bun'
+  }
+
+  // Node.js
+  if (typeof process !== 'undefined' && process.versions?.node) {
+    return 'node'
+  }
+
+  return 'unknown'
+}
+
+/**
+ * Detect the best database provider for the current environment
+ */
+export function detectDatabaseProvider(): DatabaseProvider {
+  const runtime = detectRuntime()
+
+  switch (runtime) {
+    case 'cloudflare-workers':
+      return 'd1'
+
+    case 'node':
+    case 'bun':
+      // Check if better-sqlite3 is available
+      try {
+        if (typeof require !== 'undefined') {
+          require.resolve('better-sqlite3')
+          return 'sqlite'
+        }
+      }
+      catch {
+        return 'memory'
+      }
+      return 'memory'
+
+    default:
+      return 'memory'
+  }
+}
+
+/**
+ * Get runtime capabilities
+ */
+export function getRuntimeCapabilities(): {
+  hasFileSystem: boolean
+  hasNetworking: boolean
+  hasDatabase: boolean
+  hasSQLite: boolean
+  hasD1: boolean
+  supportsWorkers: boolean
+} {
+  const runtime = detectRuntime()
+
+  switch (runtime) {
+    case 'cloudflare-workers':
+      return {
+        hasFileSystem: false,
+        hasNetworking: true,
+        hasDatabase: true,
+        hasSQLite: false,
+        hasD1: true,
+        supportsWorkers: true,
+      }
+
+    case 'node':
+      return {
+        hasFileSystem: true,
+        hasNetworking: true,
+        hasDatabase: true,
+        hasSQLite: true,
+        hasD1: false,
+        supportsWorkers: false,
+      }
+
+    case 'bun':
+      return {
+        hasFileSystem: true,
+        hasNetworking: true,
+        hasDatabase: true,
+        hasSQLite: true,
+        hasD1: false,
+        supportsWorkers: false,
+      }
+
+    default:
+      return {
+        hasFileSystem: false,
+        hasNetworking: false,
+        hasDatabase: false,
+        hasSQLite: false,
+        hasD1: false,
+        supportsWorkers: false,
+      }
+  }
+}
+
+/**
+ * Get environment info for debugging
+ */
+export function getEnvironmentInfo(): {
+  runtime: Runtime
+  databaseProvider: DatabaseProvider
+  capabilities: ReturnType<typeof getRuntimeCapabilities>
+  nodeVersion?: string
+  bunVersion?: string
+  platform?: string
+  arch?: string
+} {
+  const runtime = detectRuntime()
+  const info: ReturnType<typeof getEnvironmentInfo> = {
+    runtime,
+    databaseProvider: detectDatabaseProvider(),
+    capabilities: getRuntimeCapabilities(),
+  }
+
+  // Add Node.js specific info
+  if (typeof process !== 'undefined') {
+    info.nodeVersion = process.versions?.node
+    info.bunVersion = process.versions?.bun
+    info.platform = process.platform
+    info.arch = process.arch
+  }
+
+  // Add Bun specific info
+  if (typeof (globalThis as any).Bun !== 'undefined') {
+    info.bunVersion = (globalThis as any).Bun.version
+  }
+
+  return info
+}
+
+/**
+ * Setup test environment variables
+ */
+export function setupTestEnvironment(): void {
+  const defaultEnv = {
+    NODE_ENV: 'test',
+    // Common test variables
+    RESEND_API_KEY: 'test_key_mock',
+    DATABASE_URL: ':memory:',
+    // Disable external services in tests
+    DISABLE_ANALYTICS: 'true',
+    DISABLE_MONITORING: 'true',
+  }
+
+  // Set environment variables if not already set
+  Object.entries(defaultEnv).forEach(([key, defaultValue]) => {
+    if (!getEnv(key)) {
+      if (typeof process !== 'undefined' && process.env) {
+        process.env[key] = defaultValue
+      }
+    }
+  })
+}
+
+/**
+ * Check if we're in a test environment
+ */
+export function isTestEnvironment(): boolean {
+  return isTest()
+    || getEnv('VITEST') === 'true'
+    || getEnv('JEST_WORKER_ID') !== undefined
+}
+
+/**
+ * Check if we're in CI environment
+ */
+export function isCIEnvironment(): boolean {
+  return getEnv('CI') === 'true'
+    || getEnv('GITHUB_ACTIONS') === 'true'
+    || getEnv('GITLAB_CI') === 'true'
+    || getEnv('TRAVIS') === 'true'
+    || getEnv('CIRCLECI') === 'true'
+}
+
+/**
  * Development utilities
  */
 export const DevUtils = {

@@ -2,15 +2,12 @@
 
 import {
   confirm,
-  getCurrentVersion,
   select,
-  updateChangelog,
-  getChangedFiles,
-  analyzeChangesForVersionBump,
-  updatePackageVersion,
-  incrementVersion,
-  commitAndPush as utilsCommitAndPush
-} from '@go-corp/utils'
+} from '@go-corp/utils/node'
+import {
+  GitOperations,
+  createGitOperations,
+} from '@go-corp/utils/node'
 import { readFileSync, writeFileSync } from 'fs'
 import { execSync } from 'child_process'
 
@@ -47,19 +44,19 @@ async function writePackageJson(packageData) {
 }
 
 // Function to commit and push changes
-async function commitAndPush(message, createTag = false) {
+async function commitAndPush(git, message, createTag = false) {
   if (createTag) {
-    const version = getCurrentVersion()
+    const version = git.getCurrentVersion()
     // Create git tag using git command
     try {
-      execSync(`git tag v${version}`, { stdio: 'inherit' })
+      await git.createTag(`v${version}`, `Release v${version}`)
     } catch (error) {
       console.warn(`Warning: Could not create tag v${version}:`, error.message)
     }
   }
   
   try {
-    utilsCommitAndPush(message, true)
+    git.commitAndPush(message, true)
   } catch (error) {
     if (error.message.includes('has no upstream branch')) {
       log('Attempting to set upstream branch and push...', COLORS.yellow)
@@ -74,7 +71,7 @@ async function commitAndPush(message, createTag = false) {
   // Push tags if they were created
   if (createTag) {
     try {
-      execSync('git push --tags', { stdio: 'inherit' })
+      await git.pushTags()
     } catch (error) {
       console.warn('Warning: Could not push tags:', error.message)
     }
@@ -86,16 +83,18 @@ async function commitAndPush(message, createTag = false) {
  * Supports automatic version detection or manual override
  */
 async function createRelease() {
+  const git = createGitOperations()
+  
   try {
     log('🚀 Starting automated release process for @go-corp/utils...', COLORS.cyan)
 
     // Get current version
-    const currentVersion = getCurrentVersion()
+    const currentVersion = git.getCurrentVersion()
     log(`📋 Current version: ${currentVersion}`, COLORS.blue)
 
     // Analyze changes
     log('🔍 Analyzing changes...', COLORS.yellow)
-    const analysis = analyzeChangesForVersionBump()
+    const analysis = git.analyzeChangesForVersionBump()
     
     // Analysis complete
 
@@ -122,10 +121,10 @@ async function createRelease() {
     }
 
     // Prepare version options with safe calculations
-    const patchVersion = incrementVersion(currentVersion, 'patch')
-    const minorVersion = incrementVersion(currentVersion, 'minor') 
-    const majorVersion = incrementVersion(currentVersion, 'major')
-    const recommendedVersion = incrementVersion(currentVersion, analysis.versionBump)
+    const patchVersion = git.incrementVersion(currentVersion, 'patch')
+    const minorVersion = git.incrementVersion(currentVersion, 'minor') 
+    const majorVersion = git.incrementVersion(currentVersion, 'major')
+    const recommendedVersion = git.incrementVersion(currentVersion, analysis.versionBump)
     
     // Version options calculated
     
@@ -145,7 +144,7 @@ async function createRelease() {
     
     // Version selected
 
-    const newVersion = incrementVersion(currentVersion, selectedBumpType)
+    const newVersion = git.incrementVersion(currentVersion, selectedBumpType)
     log(`🎯 Selected version: ${newVersion} (${selectedBumpType})`, COLORS.cyan)
 
     // Get changelog entries
@@ -181,14 +180,14 @@ async function createRelease() {
 
     // Execute release steps
     log(`📦 Updating package.json to version ${newVersion}...`, COLORS.cyan)
-    updatePackageVersion(newVersion)
+    git.updatePackageVersion(newVersion)
 
     log('📝 Updating CHANGELOG.md...', COLORS.cyan)
-    updateChangelog(newVersion, analysis.changeType, changesList)
+    git.updateChangelog(newVersion, analysis.changeType, changesList)
 
     log('📤 Committing and pushing changes...', COLORS.cyan)
     const commitMessage = `chore: release v${newVersion}`
-    await commitAndPush(commitMessage, true)
+    await commitAndPush(git, commitMessage, true)
 
     // Publish to npm if requested
     if (shouldPublish) {

@@ -1,5 +1,50 @@
 # @go-corp/utils
 
+## 1.6.0
+
+### Minor Changes
+
+- **CONSOLIDATION MILESTONE**: Major code consolidation across Go Corp shared packages
+- Add comprehensive `GitOperations` class consolidating go-workflow-v2 and go-utils git utilities
+- Add enterprise `StructuredLogger` class consolidated from go-test-suite with telemetry support
+- Add runtime detection utilities: `detectRuntime`, `detectDatabaseProvider`, `getRuntimeCapabilities`
+- Add enhanced environment utilities: `getEnvironmentInfo`, `setupTestEnvironment`, `isTestEnvironment`, `isCIEnvironment`
+- Export comprehensive Git API with SimpleGit integration and execSync fallback
+- Export structured logging with performance monitoring and telemetry
+- Maintain backward compatibility with legacy function exports
+- Consolidate ~800+ lines of duplicate code from dependent packages
+
+### Breaking Changes
+
+- Some internal Git utility functions renamed with "Legacy" suffix to avoid conflicts
+- Debug utility functions renamed with "Legacy" suffix, new structured logger is primary export
+
+### Migration Guide
+
+For existing users, imports remain the same, but new consolidated APIs are recommended:
+
+```ts
+// Old way (still works)
+import { getCurrentBranch, hasUncommittedChanges } from '@go-corp/utils/node'
+
+// New recommended way
+import { GitOperations, createGitOperations } from '@go-corp/utils/node'
+const git = createGitOperations()
+await git.getCurrentBranch()
+await git.hasUncommittedChanges()
+```
+
+```ts
+// Old way (still works)  
+import { createTimer, logWithTime } from '@go-corp/utils/debug'
+
+// New recommended way
+import { StructuredLogger, createLogger } from '@go-corp/utils/debug'
+const logger = createLogger()
+const timer = logger.timer('operation')
+logger.logWithTime('message')
+```
+
 ## 1.5.0
 
 ### Minor Changes

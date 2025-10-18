@@ -1,14 +1,14 @@
 {
   "name": "@go-corp/utils",
   "type": "module",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "A collection of Cloudflare Workers-compatible utility functions for Go Corp projects. Node.js utilities available via @go-corp/utils/node.",
   "author": "Go Corp <dev@golive.me>",
   "license": "MIT",
   "homepage": "https://github.com/go-corp/utils#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/go-corp/utils.git"
+    "url": "git+https://github.com/go-corp/utils.git"
   },
   "bugs": {
     "url": "https://github.com/go-corp/utils/issues"
@@ -137,7 +137,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "go-utils-mcp": "./mcp-server/server.js"
+    "go-utils-mcp": "mcp-server/server.js"
   },
   "files": [
     "README.md",
