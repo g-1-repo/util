@@ -1,5 +1,13 @@
 # @go-corp/utils
 
+## [1.7.1] - 2025-10-18
+
+### Other Changes
+
+- chore: commit changes before release
+- chore: release v1.7.0
+
+
 ## 1.7.0
 
 ### Minor Changes
