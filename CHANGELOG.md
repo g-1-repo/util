@@ -1,5 +1,12 @@
 # @go-corp/utils
 
+## 1.7.0
+
+### Minor Changes
+
+- Add new features and functionality
+
+
 ## 1.6.0
 
 ### Minor Changes
