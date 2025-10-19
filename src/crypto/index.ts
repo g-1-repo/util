@@ -147,3 +147,6 @@ export function getCacheStats(): { size: number, keys: string[] } {
 
 // Export CUID2-based ID utilities
 export * from './id-utils.js'
+
+// Export Workers-safe crypto utilities
+export * from './workers-safe.js'
