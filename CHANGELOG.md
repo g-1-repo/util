@@ -1,5 +1,16 @@
 # @g-1/util
 
+## [1.9.1] - 2025-10-19
+
+### Bug Fixes
+
+- Add workers-safe crypto module to build output
+
+### Other Changes
+
+- test: Fix flaky sortable ID test with proper timing
+
+
 ## [1.9.0] - 2025-10-19
 
 ### Features
