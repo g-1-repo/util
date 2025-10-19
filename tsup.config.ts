@@ -18,6 +18,7 @@ export default defineConfig({
     'node/prompt-utils': 'src/node/prompt-utils.ts',
     'types/index': 'src/types/index.ts',
     'crypto/index': 'src/crypto/index.ts',
+    'crypto/workers-safe': 'src/crypto/workers-safe.ts',
     'database/index': 'src/database/index.ts',
     'debug/index': 'src/debug/index.ts',
     'http/index': 'src/http/index.ts',
