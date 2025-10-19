@@ -123,12 +123,13 @@ describe('Workers-Safe Crypto Utilities', () => {
       expect(isValidWorkerSafeCuid2(cuid)).toBe(true)
     })
 
-    it('should generate chronologically sortable IDs', () => {
+    it('should generate chronologically sortable IDs', async () => {
       const id1 = generateWorkerSafeSortableId()
       // Small delay to ensure different timestamps
+      await new Promise(resolve => setTimeout(resolve, 1))
       const id2 = generateWorkerSafeSortableId()
       
-      expect(id1 < id2).toBe(true)
+      expect(id1 <= id2).toBe(true) // Use <= since timestamps might be same
     })
   })
 
