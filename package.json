@@ -1,17 +1,17 @@
 {
-  "name": "@go-corp/utils",
+  "name": "@g-1/util",
   "type": "module",
   "version": "1.7.2",
-  "description": "A collection of Cloudflare Workers-compatible utility functions for Go Corp projects. Node.js utilities available via @go-corp/utils/node.",
-  "author": "Go Corp <dev@golive.me>",
+  "description": "G1 Shared Utilities. The centralized library for common G1 business logic and utilities. Designed for high-performance and Cloudflare Workers compatibility. The single source of truth for shared functions across all products.",
+  "author": "G1 <dev@golive.me>",
   "license": "MIT",
-  "homepage": "https://github.com/go-corp/utils#readme",
+  "homepage": "https://github.com/g-1-repo/util#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/go-corp/utils.git"
+    "url": "git+https://github.com/g-1-repo/util.git"
   },
   "bugs": {
-    "url": "https://github.com/go-corp/utils/issues"
+    "url": "https://github.com/g-1-repo/util/issues"
   },
   "keywords": [
     "utils",
@@ -195,7 +195,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^6.0.0",
     "@changesets/cli": "^2.29.7",
-    "@go-corp/workflow": "^2.12.11",
+    "@go-corp/workflow": "^2.12.14",
     "@types/bun": "^1.3.0",
     "bundlesize2": "^0.0.35",
     "eslint": "^9.38.0",
