@@ -1,28 +1,28 @@
-# @go-corp/utils
+# @g-1/util
 
-[![npm version](https://badge.fury.io/js/@go-corp%2Futils.svg)](https://badge.fury.io/js/@go-corp%2Futils)
-[![npm downloads](https://img.shields.io/npm/dm/@go-corp/utils.svg)](https://www.npmjs.com/package/@go-corp/utils)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@go-corp/utils?label=bundle%20size)](https://bundlephobia.com/package/@go-corp/utils)
+[![npm version](https://badge.fury.io/js/@g-1%2Futil.svg)](https://badge.fury.io/js/@g-1%2Futil)
+[![npm downloads](https://img.shields.io/npm/dm/@g-1/util.svg)](https://www.npmjs.com/package/@g-1/util)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@g-1/util?label=bundle%20size)](https://bundlephobia.com/package/@g-1/util)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/go-corp/utils/workflows/CI/badge.svg)](https://github.com/go-corp/utils/actions)
+[![CI](https://github.com/g-1-repo/util/workflows/CI/badge.svg)](https://github.com/g-1-repo/util/actions)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
-A comprehensive collection of utility functions for TypeScript/JavaScript projects.
+G1 Shared Utilities. The centralized library for common G1 business logic and utilities.
 
 ## Installation
 
 ```bash
-npm install @go-corp/utils
+npm install @g-1/util
 # or
-yarn add @go-corp/utils
+yarn add @g-1/util
 # or
-bun add @go-corp/utils
+bun add @g-1/util
 ```
 
 ## Usage
 
 ```typescript
-import { deepClone, formatDate, toCamelCase } from '@go-corp/utils'
+import { deepClone, formatDate, toCamelCase } from '@g-1/util'
 
 // String utilities
 const camelCased = toCamelCase('hello world') // 'helloWorld'
@@ -167,27 +167,27 @@ bun run lint
 
 ## MCP Server Integration
 
-@go-corp/utils includes an MCP (Model Context Protocol) server that automatically provides AI assistants with context about your utilities.
+@g-1/util includes an MCP (Model Context Protocol) server that automatically provides AI assistants with context about your utilities.
 
 ### Setup
 
 1. Install the package:
 ```bash
-npm install @go-corp/utils
+npm install @g-1/util
 ```
 
 2. Configure Warp MCP in your terminal settings:
 ```json
 {
   "mcpServers": {
-    "go-utils": {
-      "command": "go-utils-mcp"
+    "g1-util": {
+      "command": "g1-util-mcp"
     }
   }
 }
 ```
 
-3. The AI will now automatically know when `@go-corp/utils` is available and suggest relevant utilities!
+3. The AI will now automatically know when `@g-1/util` is available and suggest relevant utilities!
 
 ### What the AI Will Know
 - ✅ Which utilities are available in your project
@@ -208,4 +208,4 @@ See `mcp-server/README.md` for detailed setup instructions.
 
 ## License
 
-MIT © Go Corp
+MIT © G1

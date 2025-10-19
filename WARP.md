@@ -51,7 +51,7 @@ bun run build:mcp
 bun run mcp:start
 
 # Test MCP server integration
-npx go-utils-mcp
+npx g1-util-mcp
 ```
 
 ### Publishing & Releases
@@ -103,7 +103,7 @@ The codebase is organized into domain-specific utility modules:
 
 ### MCP Server Integration
 The repository includes a Model Context Protocol (MCP) server at `mcp-server/server.ts` that:
-- Automatically detects if `@go-corp/utils` is installed in projects
+- Automatically detects if `@g-1/util` is installed in projects
 - Provides AI assistants with contextual information about available utilities
 - Suggests appropriate utilities based on user tasks (release scripts, CLI tools, git workflows)
 - Integrates with Warp terminal's AI features

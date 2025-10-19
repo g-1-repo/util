@@ -137,7 +137,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "go-utils-mcp": "mcp-server/server.js"
+    "g1-util-mcp": "mcp-server/server.js"
   },
   "files": [
     "README.md",

@@ -1,14 +1,14 @@
 #!/usr/bin/env bun
-import { ProgressIndicator, getCurrentVersion } from '@go-corp/utils'
+import { ProgressIndicator, getCurrentVersion } from '@g-1/util'
 import { readFileSync } from 'fs'
 
 /**
- * Demo script for showcasing @go-corp/utils library capabilities
+ * Demo script for showcasing @g-1/util library capabilities
  * Demonstrates utility functions, MCP server integration, and library features
  */
 async function main() {
   try {
-    const spinner = new ProgressIndicator('Loading @go-corp/utils demo...')
+    const spinner = new ProgressIndicator('Loading @g-1/util demo...')
     spinner.start()
     
     // Simulate loading
@@ -19,7 +19,7 @@ async function main() {
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'))
     const version = getCurrentVersion()
     
-    console.log('\n🚀 @go-corp/utils Library Demo')
+    console.log('\n🚀 @g-1/util Library Demo')
     console.log('=====================================')
     console.log(`Version: ${version}`)
     console.log(`Description: ${pkg.description}\n`)
@@ -85,7 +85,7 @@ async function main() {
     
     console.log('\n🎨 Usage Examples:')
     console.log('```typescript')
-    console.log("import { toCamelCase, formatDate, deepClone } from '@go-corp/utils'")
+    console.log("import { toCamelCase, formatDate, deepClone } from '@g-1/util'")
     console.log('')
     console.log("// String utilities")
     console.log("const camel = toCamelCase('hello world') // 'helloWorld'")
@@ -98,7 +98,7 @@ async function main() {
     console.log('```')
     
     console.log('\n🚀 Try it out:')
-    console.log('  1. Install: npm install @go-corp/utils')
+    console.log('  1. Install: npm install @g-1/util')
     console.log('  2. Import utilities in your TypeScript/JavaScript project')
     console.log('  3. Configure MCP server for AI integration in Warp')
     console.log('  4. Run "bun run workflow" for interactive development utilities')
@@ -110,7 +110,7 @@ async function main() {
     console.log('  • Release automation and version management')
     console.log('  • AI-assisted development workflows')
     
-    console.log('\n💡 Happy coding with @go-corp/utils!')
+    console.log('\n💡 Happy coding with @g-1/util!')
     
   } catch (error) {
     console.error('\n❌ Demo error:', error)
