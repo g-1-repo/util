@@ -1,5 +1,17 @@
 # @g-1/util
 
+## [1.8.0] - 2025-10-19
+
+### Features
+
+- add NPM publish workflow
+- rebrand to G1 and update package name to @g-1/util
+
+### Other Changes
+
+- chore(ci): add CI and release workflows; update repository metadata to g-1-repo/util (#1)
+
+
 ## [1.7.2] - 2025-10-18
 
 
