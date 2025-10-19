@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Example Release Script using @go-corp/utils
+ * Example Release Script using @g-1/util
  *
  * This demonstrates how to use the Node.js utilities for automated releases
  */

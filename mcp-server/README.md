@@ -1,11 +1,11 @@
-# @go-corp/utils MCP Server
+# @g-1/util MCP Server
 
-This MCP (Model Context Protocol) server provides AI assistants with context about your available `@go-corp/utils` utilities and project information.
+This MCP (Model Context Protocol) server provides AI assistants with context about your available `@g-1/util` utilities and project information.
 
 ## What It Does
 
 The MCP server automatically:
-- ✅ Detects if `@go-corp/utils` is installed in the current project
+- ✅ Detects if `@g-1/util` is installed in the current project
 - 📋 Provides detailed information about available utilities
 - 🔍 Shows project context (name, directory, git status)
 - 💡 Suggests when to use specific utilities
@@ -15,9 +15,9 @@ The MCP server automatically:
 
 ### 1. Install the Package
 ```bash
-npm install @go-corp/utils
+npm install @g-1/util
 # or
-bun add @go-corp/utils
+bun add @g-1/util
 ```
 
 ### 2. Configure Warp MCP
@@ -26,8 +26,8 @@ Add to your Warp MCP configuration:
 ```json
 {
   "mcpServers": {
-    "go-utils": {
-      "command": "go-utils-mcp"
+    "g1-util": {
+      "command": "g1-util-mcp"
     }
   }
 }
@@ -36,15 +36,15 @@ Add to your Warp MCP configuration:
 ### 3. Test the Server
 ```bash
 # Test directly
-npx go-utils-mcp
+npx g1-util-mcp
 
-# Or from any project with @go-corp/utils
-go-utils-mcp
+# Or from any project with @g-1/util
+g1-util-mcp
 ```
 
 ## What the AI Will Know
 
-When you're in a project with `@go-corp/utils` installed, the AI assistant will automatically know about:
+When you're in a project with `@g-1/util` installed, the AI assistant will automatically know about:
 
 ### 🔧 Git & Repository Management
 - `analyzeChangesForVersionBump()` - Smart version bump detection
@@ -81,7 +81,7 @@ import {
   confirm,
   ProgressIndicator,
   updateChangelog
-} from '@go-corp/utils'
+} from '@g-1/util'
 
 // Your release automation code here
 ```
@@ -100,12 +100,12 @@ bun run build:mcp
 ### AI Not Seeing Context
 1. Make sure Warp MCP is configured correctly
 2. Restart Warp terminal
-3. Check that you're in a project with `@go-corp/utils` installed
+3. Check that you're in a project with `@g-1/util` installed
 
 ### Manual Testing
 ```bash
 # Test the context generation
-echo '{"jsonrpc": "2.0", "id": 1, "method": "resources/read", "params": {"uri": "context://go-utils"}}' | go-utils-mcp
+echo '{"jsonrpc": "2.0", "id": 1, "method": "resources/read", "params": {"uri": "context://g1-util"}}' | g1-util-mcp
 ```
 
 The server will automatically detect your project setup and provide relevant context to the AI assistant!

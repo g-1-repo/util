@@ -10,8 +10,8 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 ## 📋 Steps to Reproduce
-1. Install @go-corp/utils version: `X.X.X`
-2. Import the utility: `import { ... } from '@go-corp/utils/...'`
+1. Install @g-1/util version: `X.X.X`
+2. Import the utility: `import { ... } from '@g-1/util/...'`
 3. Call the function: `...`
 4. See error
 
@@ -30,7 +30,7 @@ A clear and concise description of what actually happened.
 ## 🔧 Code Example
 ```typescript
 // Minimal code example that reproduces the issue
-import { utilityName } from '@go-corp/utils/module'
+import { utilityName } from '@g-1/util/module'
 
 // Your code here
 ```

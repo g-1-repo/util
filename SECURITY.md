@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-We actively support the following versions of @go-corp/utils with security updates:
+We actively support the following versions of @g-1/util with security updates:
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -13,7 +13,7 @@ We actively support the following versions of @go-corp/utils with security updat
 
 ## Reporting a Vulnerability
 
-We take the security of @go-corp/utils seriously. If you discover a security vulnerability, please follow these steps:
+We take the security of @g-1/util seriously. If you discover a security vulnerability, please follow these steps:
 
 ### 🔒 Private Disclosure
 
@@ -40,7 +40,7 @@ Include the following information:
 
 ### 🛡️ Security Best Practices
 
-When using @go-corp/utils:
+When using @g-1/util:
 
 - Always use the latest version when possible
 - Validate and sanitize inputs when using utility functions
@@ -53,4 +53,4 @@ For any security-related questions or concerns:
 - Email: dev@golive.me
 - Please include "SECURITY" in the subject line
 
-Thank you for helping keep @go-corp/utils and our users safe!
+Thank you for helping keep @g-1/util and our users safe!

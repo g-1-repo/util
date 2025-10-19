@@ -1,4 +1,4 @@
-# @go-corp/utils
+# @g-1/util
 
 ## [1.7.2] - 2025-10-18
 
@@ -43,10 +43,10 @@ For existing users, imports remain the same, but new consolidated APIs are recom
 
 ```ts
 // Old way (still works)
-import { getCurrentBranch, hasUncommittedChanges } from '@go-corp/utils/node'
+import { getCurrentBranch, hasUncommittedChanges } from '@g-1/util/node'
 
 // New recommended way
-import { GitOperations, createGitOperations } from '@go-corp/utils/node'
+import { GitOperations, createGitOperations } from '@g-1/util/node'
 const git = createGitOperations()
 await git.getCurrentBranch()
 await git.hasUncommittedChanges()
@@ -54,10 +54,10 @@ await git.hasUncommittedChanges()
 
 ```ts
 // Old way (still works)  
-import { createTimer, logWithTime } from '@go-corp/utils/debug'
+import { createTimer, logWithTime } from '@g-1/util/debug'
 
 // New recommended way
-import { StructuredLogger, createLogger } from '@go-corp/utils/debug'
+import { StructuredLogger, createLogger } from '@g-1/util/debug'
 const logger = createLogger()
 const timer = logger.timer('operation')
 logger.logWithTime('message')
@@ -70,17 +70,17 @@ logger.logWithTime('message')
 - **Major Performance & Feature Update** - Comprehensive optimizations and new utility modules
   
   ### 🚀 **New Modules**
-  - **API Response Utilities** (`@go-corp/utils/api`) - Standardized API response formats
+  - **API Response Utilities** (`@g-1/util/api`) - Standardized API response formats
     - `createApiResponse()`, `createErrorResponse()`, `createPaginatedResponse()`
-    - Common HTTP status codes and error codes for Go Corp projects  
+    - Common HTTP status codes and error codes for G1 projects  
     - Type guards for response validation
-  - **Environment Utilities** (`@go-corp/utils/env`) - Cross-platform environment handling
+  - **Environment Utilities** (`@g-1/util/env`) - Cross-platform environment handling
     - `getEnv()`, `requireEnv()`, `getEnvNumber()`, `getEnvBoolean()`, `getEnvJson()`
     - `loadEnvConfig()` with type validation
     - Works in Node.js and edge environments (Cloudflare Workers)
   - **Enhanced Validation** - Better tree-shaking with core/web split
-    - `@go-corp/utils/validation/core` - Universal validation (email, UUID, phone, etc.)
-    - `@go-corp/utils/validation/web` - Web-specific validation (URL, JSON, semver, etc.)
+    - `@g-1/util/validation/core` - Universal validation (email, UUID, phone, etc.)
+    - `@g-1/util/validation/web` - Web-specific validation (URL, JSON, semver, etc.)
     - New validators: IP addresses, hex colors, credit cards, domains, slugs
   
   ### ⚡ **Performance Optimizations**
@@ -100,7 +100,7 @@ logger.logWithTime('message')
   - Individual modules: All under 5KB gzipped ✅
   - 167 tests passing with 100% compatibility
   
-  Perfect for modern Go Corp projects requiring standardized APIs and cross-platform compatibility!
+  Perfect for modern G1 projects requiring standardized APIs and cross-platform compatibility!
 
 ## 1.3.0
 
@@ -185,8 +185,8 @@ logger.logWithTime('message')
 
 ### Patch Changes
 
-- Transfer package to @go-corp organization
-  - Move from personal scope to Go Corp organization
+- Transfer package to @g-1 organization
+  - Move from personal scope to G1 organization
   - Update repository URLs and metadata
   - No functional changes to utilities
 
@@ -216,7 +216,7 @@ logger.logWithTime('message')
   ### 🤖 MCP Server Integration
   - **AI Context Awareness** - Automatically tells AI assistants about available utilities
   - **Smart Suggestions** - AI knows when to suggest utilities for specific tasks
-  - **Project Detection** - Detects @golive_me/utils installation automatically
+  - **Project Detection** - Detects @g-1/util installation automatically
   - **Warp Terminal Integration** - Works seamlessly with MCP protocol
 
   ### 📚 Enhanced Documentation
@@ -237,9 +237,9 @@ logger.logWithTime('message')
 
 ### Major Changes
 
-- 8e426d9: # @go-corp/utils v1.0.0
+- 8e426d9: # @g-1/util v1.0.0
 
-  Initial release of @go-corp/utils - a comprehensive collection of utility functions for TypeScript/JavaScript projects.
+  Initial release of @g-1/util - a comprehensive collection of utility functions for TypeScript/JavaScript projects.
 
   ## Features
 
@@ -256,17 +256,17 @@ logger.logWithTime('message')
   ## Installation
 
   ```bash
-  npm install @go-corp/utils
+  npm install @g-1/util
   # or
-  yarn add @go-corp/utils
+  yarn add @g-1/util
   # or
-  bun add @go-corp/utils
+  bun add @g-1/util
   ```
 
   ## Quick Start
 
   ```typescript
-  import { toCamelCase, formatDate, deepClone } from "@go-corp/utils";
+  import { toCamelCase, formatDate, deepClone } from "@g-1/util";
 
   // String utilities
   const camelCased = toCamelCase("hello world"); // 'helloWorld'

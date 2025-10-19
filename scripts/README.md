@@ -18,10 +18,10 @@ Features:
 - Automatic changelog generation
 - Git tagging and pushing
 - Semantic versioning compliance
-- Integration with @go-corp/utils
+- Integration with @g-1/util
 
 ### `workflow.ts` 
-Development workflow utilities powered by `@go-corp/utils`.
+Development workflow utilities powered by `@g-1/util`.
 
 ```bash
 bun run workflow
@@ -42,7 +42,7 @@ bun run demo
 ```
 
 Demonstrates:
-- @go-corp/utils library capabilities
+- @g-1/util library capabilities
 - Utility function categories and examples
 - MCP server integration features
 - Development commands and workflows
@@ -69,7 +69,7 @@ bun run release:help
 
 ## TypeScript Library Specific
 
-These scripts are tailored for the @go-corp/utils TypeScript utility library:
+These scripts are tailored for the @g-1/util TypeScript utility library:
 
 - **Release Management**: Handles dual package builds (CJS/ESM), TypeScript declarations
 - **MCP Integration**: Considers MCP server builds and testing
@@ -78,4 +78,4 @@ These scripts are tailored for the @go-corp/utils TypeScript utility library:
 
 ## Dependencies
 
-These scripts use `@go-corp/utils` for workflow automation and utilities. Since this is the same package being developed, they demonstrate real-world usage of the library's capabilities.
+These scripts use `@g-1/util` for workflow automation and utilities. Since this is the same package being developed, they demonstrate real-world usage of the library's capabilities.

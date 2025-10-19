@@ -18,28 +18,28 @@ Describe the solution you'd like in detail.
 ### API Design
 ```typescript
 // Example of how you'd like the API to work
-import { newUtility } from '@go-corp/utils/module'
+import { newUtility } from '@g-1/util/module'
 
 const result = newUtility(/* parameters */)
 ```
 
 ### Module Location
 Which module should this utility belong to?
-- [ ] `@go-corp/utils/array`
-- [ ] `@go-corp/utils/async`
-- [ ] `@go-corp/utils/crypto`
-- [ ] `@go-corp/utils/database`
-- [ ] `@go-corp/utils/date`
-- [ ] `@go-corp/utils/debug`
-- [ ] `@go-corp/utils/http`
-- [ ] `@go-corp/utils/math`
-- [ ] `@go-corp/utils/node`
-- [ ] `@go-corp/utils/object`
-- [ ] `@go-corp/utils/string`
-- [ ] `@go-corp/utils/types`
-- [ ] `@go-corp/utils/validation`
-- [ ] `@go-corp/utils/web`
-- [ ] New module: `@go-corp/utils/____`
+- [ ] `@g-1/util/array`
+- [ ] `@g-1/util/async`
+- [ ] `@g-1/util/crypto`
+- [ ] `@g-1/util/database`
+- [ ] `@g-1/util/date`
+- [ ] `@g-1/util/debug`
+- [ ] `@g-1/util/http`
+- [ ] `@g-1/util/math`
+- [ ] `@g-1/util/node`
+- [ ] `@g-1/util/object`
+- [ ] `@g-1/util/string`
+- [ ] `@g-1/util/types`
+- [ ] `@g-1/util/validation`
+- [ ] `@g-1/util/web`
+- [ ] New module: `@g-1/util/____`
 
 ## 🔄 Alternatives Considered
 Describe any alternative solutions or features you've considered.
