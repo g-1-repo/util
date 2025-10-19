@@ -53,27 +53,27 @@ function getTimestampComponent(): string {
 
 /**
  * Generate a CUID2-compatible ID that's safe for Cloudflare Workers
- * 
+ *
  * This implementation:
  * - Starts with a letter for HTML ID compatibility
  * - Includes timestamp for rough chronological ordering
  * - Uses secure random generation via Web Crypto API
  * - Avoids global scope crypto operations
- * 
+ *
  * @returns A CUID2-compatible ID string
  */
 export function createWorkerSafeCuid2(): string {
   const prefix = 'c' // Start with letter like CUID2
   const timestamp = getTimestampComponent()
   const random = randomStringWithAlphabet(BASE36_ALPHABET, 12)
-  
+
   return prefix + timestamp + random
 }
 
 /**
  * Generate a generic ID using Workers-safe crypto
  * This is a drop-in replacement for generateDatabaseId from id-utils
- * 
+ *
  * @returns A cryptographically secure ID string
  */
 export function generateWorkerSafeId(): string {
@@ -82,7 +82,7 @@ export function generateWorkerSafeId(): string {
 
 /**
  * Generate a prefixed ID using Workers-safe crypto
- * 
+ *
  * @param prefix - Prefix to add before the ID
  * @returns A prefixed ID string
  */
@@ -92,7 +92,7 @@ export function generateWorkerSafePrefixedId(prefix: string): string {
 
 /**
  * Generate multiple unique IDs at once (Workers-safe)
- * 
+ *
  * @param count - Number of IDs to generate
  * @returns Array of unique ID strings
  */
@@ -102,7 +102,7 @@ export function generateWorkerSafeMultipleIds(count: number): string[] {
 
 /**
  * Generate a hex ID using Workers-safe crypto
- * 
+ *
  * @param length - Length of the hex ID (default: 16)
  * @returns A hexadecimal ID string
  */
@@ -112,7 +112,7 @@ export function generateWorkerSafeHexId(length: number = 16): string {
 
 /**
  * Generate a URL-safe ID using Workers-safe crypto
- * 
+ *
  * @param length - Length of the URL-safe ID (default: 16)
  * @returns A URL-safe ID string
  */
@@ -122,7 +122,7 @@ export function generateWorkerSafeUrlSafeId(length: number = 16): string {
 
 /**
  * Generate a numeric ID using Workers-safe crypto
- * 
+ *
  * @param length - Length of the numeric ID (default: 16)
  * @returns A numeric ID string
  */
@@ -132,7 +132,7 @@ export function generateWorkerSafeNumericId(length: number = 16): string {
 
 /**
  * Generate an ID with custom alphabet using Workers-safe crypto
- * 
+ *
  * @param alphabet - Custom alphabet to use
  * @param length - Length of the ID (default: 16)
  * @returns A random ID string using the custom alphabet
@@ -143,7 +143,7 @@ export function generateWorkerSafeIdWith(alphabet: string, length: number = 16):
 
 /**
  * Generate a time-based sortable ID using Workers-safe crypto
- * 
+ *
  * @returns A sortable ID string (timestamp-id)
  */
 export function generateWorkerSafeSortableId(): string {
@@ -155,13 +155,14 @@ export function generateWorkerSafeSortableId(): string {
 /**
  * Validate that a string looks like a CUID2
  * (Same validation logic as the original, but included for completeness)
- * 
+ *
  * @param id - The string to validate
  * @returns True if the string appears to be a valid CUID2
  */
 export function isValidWorkerSafeCuid2(id: string): boolean {
-  if (typeof id !== 'string') return false
-  
+  if (typeof id !== 'string')
+    return false
+
   // CUID2s are 2-32 characters, start with a letter, and contain only a-z, A-Z, 0-9
   const cuid2Pattern = /^[a-z][a-z0-9]{1,31}$/i
   return cuid2Pattern.test(id)
@@ -169,7 +170,7 @@ export function isValidWorkerSafeCuid2(id: string): boolean {
 
 /**
  * Validate a prefixed CUID2
- * 
+ *
  * @param id - The prefixed ID to validate
  * @param prefix - The expected prefix
  * @returns True if the ID has the correct prefix and valid CUID2 suffix
@@ -178,7 +179,7 @@ export function isValidWorkerSafePrefixedCuid2(id: string, prefix: string): bool
   if (typeof id !== 'string' || !id.startsWith(prefix)) {
     return false
   }
-  
+
   const cuid2Part = id.slice(prefix.length)
   return isValidWorkerSafeCuid2(cuid2Part)
 }
