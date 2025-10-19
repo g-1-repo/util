@@ -1,5 +1,16 @@
 # @g-1/util
 
+## [1.9.0] - 2025-10-19
+
+### Features
+
+- Add Cloudflare Workers-safe crypto utilities
+
+### Other Changes
+
+- chore: commit changes before release
+
+
 ## [1.8.0] - 2025-10-19
 
 ### Features
